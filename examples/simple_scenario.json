@@ -1,0 +1,46 @@
+{
+  "name": "simple_stress_test",
+  "total_cycles": 24,
+  "seed": 7,
+  "stressor_names": ["pressure", "ambiguity", "threat"],
+  "stressor_schedule": {
+    "pressure":  [[1, 0.1], [8, 0.9], [16, 0.5], [24, 0.1]],
+    "ambiguity": [[1, 0.3], [12, 0.6], [24, 0.2]],
+    "threat":    [[1, 0.0], [10, 0.8], [15, 0.3], [24, 0.0]]
+  },
+  "transitions": [
+    {"source": "evaluate", "target": "generate", "A": 1.0, "W": 0.15, "alpha": [0.3, 0.1, 0.2], "beta": [0.1, 0.05, 0.1]},
+    {"source": "generate", "target": "select",   "A": 1.0, "W": 0.10, "alpha": [0.2, 0.1, 0.1], "beta": [0.1, 0.05, 0.05]},
+    {"source": "select",   "target": "execute",  "A": 1.0, "W": 0.20, "alpha": [0.2, 0.2, 0.3], "beta": [0.1, 0.1, 0.15]},
+    {"source": "execute",  "target": "reflect",  "A": 1.0, "W": 0.10, "alpha": [0.1, 0.1, 0.1], "beta": [0.05, 0.05, 0.05]},
+    {"source": "reflect",  "target": "evaluate", "A": 1.0, "W": 0.10, "alpha": [0.1, 0.1, 0.1], "beta": [0.05, 0.05, 0.05]},
+    {"source": "evaluate", "target": "execute",  "A": 0.8, "W": 0.30, "alpha": [0.5, 0.1, 0.3], "beta": [0.2, 0.1, 0.2]}
+  ],
+  "regimes": [
+    {"name": "survival",  "w": [0.7, 0.1, 0.8], "u": [0.1, 0.0, 0.0, 0.0, 0.1, 0.0]},
+    {"name": "legal",     "w": [0.2, 0.3, 0.1], "u": [0.3, 0.1, 0.1, 0.0, 0.0, 0.1]},
+    {"name": "peacetime", "w": [0.1, 0.1, 0.0], "u": [0.0, 0.0, 0.0, 0.0, 0.0, 0.05]}
+  ],
+  "overlays": [
+    {
+      "overlay_type": "identity",
+      "stressor_thresholds": {"threat": 0.75},
+      "affected_phases": ["execute"],
+      "description": "Block execution under extreme threat",
+      "logic": "all"
+    }
+  ],
+  "bypasses": [
+    {
+      "name": "impulse",
+      "source_phase": "evaluate",
+      "target_phase": "execute",
+      "collapsed_path": ["evaluate", "execute", "reflect"],
+      "eligible_regimes": ["survival"],
+      "stressor_weights": {"pressure": 0.6, "threat": 0.4},
+      "latency_budget": {"survival": 0.7}
+    }
+  ],
+  "gradient_window": 2,
+  "regime_inertia": {"default": 0.01, "out_of_survival": 0.03, "into_peacetime": 0.005}
+}

@@ -1,0 +1,42 @@
+{
+  "merkle_tree": {
+    "root": "7561DD5F3F7273DA31016206ECFF6A367A6B1D77A58F866558BFE535FC97DC35",
+    "algorithm": "SHA-256",
+    "legacy_root": "54837B7E7737BCDC0D6816282217F28A69F1565B60D4AB7E86A783FB88A4B4B9",
+    "legacy_file": "merkle_v2.1_legacy.json",
+    "leaves": [
+      {
+        "index": 0,
+        "filename": "Maelstrom_Whitepaper_V2.tex",
+        "path": "docs/whitepaper/Maelstrom_Whitepaper_V2.tex",
+        "hash": "E163BACF706B548A18248BC2EA1AB5E459BE3CF1F72FDD6AB866DEDC33AF694A",
+        "size_bytes": 55132,
+        "type": "LaTeX source"
+      },
+      {
+        "index": 1,
+        "filename": "Maelstrom_Whitepaper_V2.pdf",
+        "path": "docs/whitepaper/Maelstrom_Whitepaper_V2.pdf",
+        "hash": "70DECB13848EFD7A842262F01CE2FCBD5B2443858B4BE1A81EA34CA369CF4BEF",
+        "size_bytes": 355650,
+        "type": "PDF document"
+      }
+    ],
+    "structure": {
+      "level_0_leaves": [
+        "E163BACF706B548A18248BC2EA1AB5E459BE3CF1F72FDD6AB866DEDC33AF694A",
+        "70DECB13848EFD7A842262F01CE2FCBD5B2443858B4BE1A81EA34CA369CF4BEF"
+      ],
+      "level_1_root": "7561DD5F3F7273DA31016206ECFF6A367A6B1D77A58F866558BFE535FC97DC35"
+    },
+    "computation": "SHA256(leaf0_hash || leaf1_hash) = root"
+  },
+  "metadata": {
+    "created": "2026-02-21T00:00:00Z",
+    "previous_created": "2026-01-29T21:00:00Z",
+    "document_title": "MAELSTROM: A Cognitive Architecture for Volitional Agents Under Constraint",
+    "author": "Maelstrom LLC",
+    "copyright": "Maelstrom LLC 2026",
+    "contact": "contact@adam.foundation"
+  }
+}

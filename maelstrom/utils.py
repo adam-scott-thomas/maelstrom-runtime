@@ -1,0 +1,60 @@
+"""Deterministic execution utilities.
+
+Seeded RNG, deterministic tie-breaking, state hashing, and clamping.
+All randomness is recorded for reproducibility verification.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import random
+from typing import Any, Callable, Sequence, TypeVar
+
+T = TypeVar("T")
+
+
+class DeterministicRNG:
+    """Seeded RNG wrapper that records all draws for reproducibility."""
+
+    def __init__(self, seed: int):
+        self.seed = seed
+        self.rng = random.Random(seed)
+        self.draw_count = 0
+
+    def random(self) -> float:
+        self.draw_count += 1
+        return self.rng.random()
+
+    def uniform(self, a: float, b: float) -> float:
+        self.draw_count += 1
+        return self.rng.uniform(a, b)
+
+    def noise(self, amplitude: float = 0.05) -> float:
+        return self.uniform(-amplitude, amplitude)
+
+
+def deterministic_argmax(
+    items: Sequence[T],
+    key_fn: Callable[[T], float],
+    tiebreak_fn: Callable[[T], Any] | None = None,
+) -> T | None:
+    """Select item with maximum key, breaking ties deterministically."""
+    if not items:
+        return None
+    decorated = []
+    for item in items:
+        primary = key_fn(item)
+        secondary = tiebreak_fn(item) if tiebreak_fn else 0
+        decorated.append((primary, secondary, item))
+    decorated.sort(key=lambda x: (-x[0], x[1]))
+    return decorated[0][2]
+
+
+def hash_state(state_dict: dict) -> str:
+    """Produce deterministic SHA-256 hash of a state dictionary."""
+    serialized = json.dumps(state_dict, sort_keys=True, default=str)
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
+def clamp(value: float, lo: float = 0.0, hi: float = 1.0) -> float:
+    return max(lo, min(hi, value))

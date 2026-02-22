@@ -1,0 +1,677 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\geometry{margin=1in}
+
+\hypersetup{
+    hidelinks
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Maelstrom}
+\fancyhead[R]{Applied Decision Architecture \& Modeling}
+\fancyfoot[C]{contact@adam.foundation}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{\textbf{MAELSTROM}\\[0.5em]\large A Cognitive Architecture for Volitional Agents Under Constraint}
+\author{Adam Thomas\\
+\small Independent Researcher\\
+\small \texttt{contact@adam.foundation}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Executive Summary}
+
+Maelstrom is an executable cognitive architecture for artificial agents operating in resource-constrained environments subject to compliance requirements, coalition constraints, and high-stakes exposure. In this paper, ``executable'' means the architecture is specified as a cycle-level state process over the five-phase loop with explicit transition constraints and trace outputs, such that given stressor inputs and overlay constraints, the system deterministically produces an auditable decision trace under a specified proposal generator and deterministic tie-breaking rule. Rather than assuming unified rational planning, the architecture models cognition as regime arbitration under constraint, incorporating bypass dynamics and hysteretic recovery. This design enables agents to operate in domains where latency, compliance requirements, moral exposure, and termination risk interact in non-trivial ways. The system advances three core claims. First, volition is best modeled as arbitration under penalty gradients rather than as unitary optimization. Second, in the crisis scenario families studied, cognition frequently becomes bypass-dominant relative to full-loop deliberation. Third, recovery following crisis exhibits hysteresis, such that return paths are asymmetric and constrained by prior state transitions. Together, these claims address a persistent gap between prevailing epistemic models of artificial intelligence and real-world operational domains. In such domains, uncertainty, exposure, irreversible failure modes, and post-hoc auditability dominate decision quality. Maelstrom provides a foundation for autonomous systems capable of operating across survival, legal, moral, economic, and epistemic regimes while maintaining traceability and supporting doctrine formation. Core architectural mechanisms are defined in Sections 2--6 and examined through qualitative simulation in Sections 7--8.
+
+\section{Motivation}
+
+Contemporary artificial intelligence systems are predominantly optimized for epistemic accuracy and economic efficiency. These systems perform well in environments where objectives are stable, time horizons are generous, penalties are purely economic, and failure is reversible. Such assumptions align with benchmark-driven evaluation and offline optimization, but they do not reflect the conditions faced by agents operating in real-world, high-stakes domains.
+
+Operational environments impose constraints that fundamentally deform cognition. Agents must act under severe temporal scarcity, navigate frequent regime switching across survival, legal, and moral contexts, and withstand adversarial pressure from strategic counter-play. Decision-making is further shaped by compliance and liability exposure, moral veto mechanisms, and institutional defensibility requirements that cannot be reduced to scalar reward functions. In these settings, failure modes are often irreversible, and system behavior must support post-hoc audit, replay, and attribution. Action permissibility is additionally constrained by multi-party coalitions and jurisdictional veto authorities, fragmenting the decision landscape.
+
+Traditional planning architectures lack explicit mechanisms for survival-oriented cognition, legal defensibility, moral veto, forensic replay, or regret-aware adaptation under irreversible outcomes. As a result, they systematically mischaracterize the structure of decision-making in environments dominated by exposure rather than optimization. This framing motivates a shift away from reward-centric planning toward exposure-sensitive penalty structures. Maelstrom addresses these limitations by reframing cognition as negotiation under deforming constraints, replacing unified rational planning with regime arbitration and bypass dynamics suited to operational reality.
+
+\section{Architecture Overview}
+
+\subsection{Design Principle}
+
+Maelstrom models volition as regime arbitration under constraint rather than as rational planning. The architecture assumes that active cognitive regimes are determined by penalty gradients induced by environmental pressures such as temporal scarcity, exposure, compliance risk, and irreversibility. Decision-making is therefore treated as negotiation among incompatible objectives rather than optimization of a unified utility function. Arbitration is implemented as a selection rule over regime penalty signals: at each cycle, the system selects the active regime whose effective penalty signal is increasing most steeply under the current stressor field, subject to overlay and governance constraints. Specialist agents generate phase-local proposals, while the active regime determines arbitration priority and admissibility filters applied to those proposals.
+
+Under this formulation, volition does not arise from internal consensus or coherence, but from arbitration between competing demands whose relative priority shifts as constraints deform the decision landscape.
+
+\subsection{Legal Cognitive Loop}
+
+Maelstrom implements a canonical legal cognitive loop composed of five phases: Evaluate, Generate, Select, Execute, and Reflect. The loop is cyclic, with each execution feeding forward into subsequent evaluation. Here, ``legal'' refers to procedural admissibility rather than juridical law, a distinction formalized in Section 3.
+
+\begin{verbatim}
+┌──────────┐
+│ Evaluate │
+└────┬─────┘
+     ↓
+┌──────────┐
+│ Generate │
+└────┬─────┘
+     ↓
+┌──────────┐
+│  Select  │
+└────┬─────┘
+     ↓
+┌──────────┐
+│ Execute  │
+└────┬─────┘
+     ↓
+┌──────────┐
+│ Reflect  │
+└────┬─────┘
+     ↓
+┌──────────┐
+│ Evaluate │
+└──────────┘
+\end{verbatim}
+
+Each phase is executed by a distinct specialist agent with intentionally incompatible incentives. The loop is not designed to converge toward internal agreement, but to surface conflict and force arbitration under constraint. This structure mirrors operational decision-making contexts in which clarity, novelty, defensibility, tempo, and post-hoc coherence compete rather than align.
+
+\subsection{Specialist Agents}
+
+Each phase of the cognitive loop is implemented by a dedicated specialist agent with a dominant incentive profile, as summarized below.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Phase} & \textbf{Agent} & \textbf{Dominant Incentive} \\
+\midrule
+Evaluate & Kestrel Adar & Clarity, risk assessment \\
+Generate & Dorian Vale & Novelty, optionality \\
+Select & Helene Quatre & Defensibility, obligation \\
+Execute & Vance Calderon & Tempo, closure \\
+Reflect & Isolde Marek & Coherence, improvement, attribution of blame \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Operationally, each specialist agent emits a finite set of phase-local proposals at each cycle. A proposal consists of an action candidate and an attached phase-local justification vector over the relevant trace signals for that phase (e.g., clarity, novelty, defensibility, tempo, coherence). Proposal generation is scenario-constrained and deterministic given the current trace state, using fixed heuristics per agent; when multiple proposals tie under the same phase-local score, a deterministic lexicographic tie-break is applied. Together, these agents form a multi-party negotiation layer rather than a unitary planner. Conflict between agents is not treated as a failure mode but as the primary mechanism through which volition emerges. Agent incentives shape local proposals, while regimes determine arbitration priority under constraint. ``Attribution of blame'' denotes post-hoc assignment of responsibility within the Reflect phase, operationalized in this study as trace-linked attribution used to support regret computation and doctrine formation rather than as an affective construct. Arbitration among incompatible incentives, rather than internal harmony, determines action selection.
+
+\section{Governance and Legality}
+
+\subsection{Constitutional Legality}
+
+Maelstrom incorporates an explicit governance layer that constrains permissible cognitive transitions. This layer enforces procedural legality by defining which state transitions are allowed within the architecture under a given regime. When a proposed transition violates these constraints, the system does not attempt to resolve the violation through deliberation. Instead, the violation triggers a bypass into an alternate regime or pathway.
+
+Within the model, illegality is treated as procedural rather than moral. The governance layer does not encode ethical values or outcome preferences. It specifies admissible process. This distinction allows the architecture to model environments in which legality, compliance, or institutional rules constrain action independently of moral reasoning or reward optimization.
+
+\subsection{Registration and Verification Roles}
+
+The architecture distinguishes between two conceptual roles involved in governance: registration and verification. Registration refers to the capture of internal state transitions and decisions as they occur within the cognitive loop. This process is non-interpretive and does not evaluate correctness, intent, or justification. Its function is to preserve a stable representation of what occurred.
+
+Verification operates over this registered record after the fact. It evaluates decisions and transitions against procedural constraints and regime-specific rules to determine admissibility or violation. This separation allows the model to support replay, attribution, and counterfactual comparison without contaminating the original decision process.
+
+Importantly, these roles are conceptual components of the cognitive architecture, not external audit systems. Their purpose in this study is to support traceability and regime analysis, not forensic enforcement.
+
+\subsection{Identity and Coalition Overlays}
+
+Maelstrom models Identity and Coalition as constraint overlays that modify the permissible action space rather than as agents or objective functions. The Identity overlay imposes veto constraints based on intolerable losses or non-negotiable commitments internal to the agent. The Coalition overlay introduces additional constraints derived from multi-party participation, shared accountability, or institutional membership.
+
+Neither overlay provides goals, rewards, or optimization criteria. Instead, they define boundaries on action by specifying what cannot be done or cannot be defended within a given regime. Veto events persist as part of the agent's trace and influence later doctrine formation. This negative constraint structure is essential for modeling moral and legal reasoning, where legitimacy is determined by admissibility and defensibility rather than by outcome maximization.
+
+\section{Stressor and Regime Model}
+
+\subsection{Stressors}
+
+Maelstrom models environmental pressure as stressor fields that deform the legality graph governing permissible cognitive transitions. The legality graph denotes the space of procedurally admissible transitions within the cognitive loop. Stressors do not directly specify actions or objectives. Instead, they reshape which transitions are viable, penalized, or bypassed under constraint.
+
+Crisis-relevant stressors include time pressure, ambiguity, threat\_level, moral\_weight, and accumulated failure\_count. These stressors steepen penalties on deliberative pathways and bias the system toward faster, lower-legibility transitions.
+
+In addition to crisis conditions, Maelstrom models peacetime stressors that operate over longer horizons. These include boredom, opportunity\_pressure, competition, novelty\_pressure, resource\_decay, and institutional inertia. Although less acute, these stressors gradually deform the action space, eroding coherence and capability if unaddressed.
+
+A formal definition of stressor schedules and the legality-graph deformation operator is provided in Appendix A.
+
+\subsection{Regime Arbitration}
+
+At any point in execution, the agent operates under a dominant optimization regime. Each regime defines a primary penalty structure rather than a reward function. The regimes modeled in this study are survival, legal, moral, economic, epistemic, and peacetime.
+
+The survival regime minimizes termination risk. The legal regime minimizes exposure and liability. The moral regime minimizes unjustified harm. The economic regime minimizes opportunity cost and resource loss. The epistemic regime minimizes uncertainty. The peacetime regime minimizes institutional decay and long-term degradation.
+
+Regime selection is not fixed and does not arise from deliberative choice. Instead, regimes emerge through arbitration driven by changing penalty gradients induced by stressor fields. As stressors intensify or abate, the relative dominance of regimes shifts accordingly.
+
+The operational arbitration rule, penalty signal definition, and the trace-derived constraint state used by arbitration are specified in Appendix A.
+
+\subsection{Hysteresis}
+
+Regime transitions in Maelstrom exhibit hysteresis. Entry into crisis regimes occurs rapidly as penalty gradients steepen, while exit from those regimes occurs slowly even after stressors subside. Operationally, the active regime corresponds to the regime with the maximal finite-difference increase in its penalty signal over recent cycles, $\arg\max_r (\Delta P_r/\Delta t)$, computed from trace-logged regime penalty signals. As a result, recovery is not the inverse of failure. Instead, it requires additional structure, time, and constraint to restore prior operating regimes.
+
+This model explains why panic and emergency behavior emerge quickly, while recovery and normalization require sustained institutional or environmental scaffolding.
+
+\section{Bypass Dynamics}
+
+Maelstrom models bypasses as adaptive substitutions that collapse deliberative granularity in order to reduce latency under constraint. When penalty gradients steepen, the system selectively short-circuits portions of the cognitive loop, trading deliberative completeness for regime-appropriate viability. Bypasses are not malfunctions or errors. They are lawful responses to incompatible demands imposed by stressor fields. Bypass labels are descriptive shorthand for recurrent structural patterns, not affective states.
+
+Each bypass is defined by the phases it collapses, the benefit it confers under pressure, the cost it incurs, and the regime contexts in which it is most likely to dominate.
+
+\subsection{Bypass Taxonomy}
+
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+\textbf{Bypass} & \textbf{Collapsed Path} & \textbf{Primary Benefit} & \textbf{Primary Cost} & \textbf{Dominant Regime(s)} \\
+\midrule
+Impulse & Evaluate $\to$ Execute & Tempo & Loss of clarity & Survival \\
+Rumination & Evaluate $\to$ Reflect & Clarity & Deadline failure & Epistemic \\
+Mania & Generate $\to$ Execute & Exploration & Incoherence & Economic \\
+Guilt & Select $\to$ Reflect & Compliance & Paralysis & Moral, Legal \\
+Over-learning & Reflect $\to$ Generate & Lesson formation & Combinatorial blowup & Epistemic, Economic \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Functional Role}
+
+Bypasses arise when the cost of full arbitration exceeds the cost of a constrained failure mode. In survival regimes, Impulse prioritizes response speed at the expense of situational clarity. Under epistemic pressure, Rumination sacrifices action to preserve coherence. Mania accelerates exploration by bypassing selection, while Guilt substitutes reflection for execution when defensibility dominates. Over-learning amplifies lesson extraction following failure, often overshooting into combinatorial expansion.
+
+Each bypass selects a failure mode that is locally admissible under the active regime. No bypass is globally optimal, and none preserves all desiderata.
+
+Bypass selection uses only current-cycle signals and the regime-specific latency budget. Reported ``cost profiles'' are measured post-hoc as next-cycle deltas in the bypass's primary-cost trace signals and $P_r(t)$, to characterize consequences rather than to drive selection.
+
+\subsection{Adaptive Consequences}
+
+Although bypasses enable short-term viability, repeated bypass activation reshapes subsequent cognition. Collapsed deliberation alters trace structure, biases recovery pathways, and contributes to persistent doctrine formed under stress. Repeated bypass activation also creates conditions for counterfactual comparison during reflection. As a result, bypass behavior functions as both an acute adaptive mechanism and a long-term shaping force within the architecture.
+
+\section{Doctrine and Counterfactuals}
+
+\subsection{Doctrine Formation}
+
+Maelstrom defines doctrine as a persistent modification of cognitive behavior arising from prior execution under constraint. Doctrine is not a rule set, policy library, or objective function. It is an emergent structure formed through accumulated traces of action, veto, and regret.
+
+Doctrine formation requires five components. First, a trace log preserves the sequence of executed transitions. Second, an archive of unexecuted proposals retains alternatives that were generated but rejected or bypassed. Third, a counterfactual cost model enables comparison between executed and unexecuted paths. Fourth, veto history records constraints imposed by Identity, Coalition, or procedural legality. Fifth, a regret model integrates these elements to assess the cost of foregone alternatives.
+
+Together, these components allow the system to encode lessons that persist beyond a single episode without requiring explicit rule construction or replay of catastrophic outcomes. In this study, ``doctrine retention'' is operationalized as persistence of parameterized sensitivities and selection biases across episodes, measured as the stability of learned proposal-weight adjustments and veto-trigger frequencies under repeated constraint patterns.
+
+\subsection{Regret Engine}
+
+Reflection in Maelstrom computes regret through counterfactual simulation rather than re-execution. Executed reality proceeds through survival-oriented cognition, while simulated alternatives are evaluated through reasoning-oriented cognition operating on the archived proposal space. For clarity, this distinction is architectural: execution prioritizes viability under the active regime, while reflection prioritizes counterfactual comparison under trace constraints. This distinction mirrors the survival and epistemic regimes introduced in Section 4.
+
+This separation allows the system to learn from failure, near-failure, and constraint-driven compromise without reenacting high-risk behaviors. Regret is therefore not an affective signal but a structural comparison between realized and unrealized trajectories under the same constraint landscape.
+
+By enabling learning without catastrophic replay, the regret engine supports adaptation in domains where experimentation is expensive, irreversible, or morally constrained.
+
+\subsection{Doctrine Propagation}
+
+Once formed, doctrine propagates across multiple dimensions of the architecture. It diffuses across regimes, shaping behavior under different optimization priorities. It influences multiple specialist agents, biasing arbitration in future loops. Doctrine also persists across context windows and episodes, allowing prior constraint experiences to shape future decisions. In the presence of coalition overlays, doctrine further propagates across shared institutional or multi-party contexts.
+
+This propagation mechanism links individual cognition to collective and organizational behavior. As a result, Maelstrom's doctrine model aligns closely with findings in organizational theory and civil--military cognition, where prior decisions, constraints, and near-misses exert long-term influence on future action.
+
+\section{Scenarios and Simulation Results}
+
+Maelstrom was executed in controlled simulation across a set of structured scenario geometries designed to stress different combinations of temporal pressure, exposure, coalition constraints, and irreversibility. The scenarios executed in this study were Whistleblower's Thumb Drive (20 cycles), The Algorithm (20 cycles), The Theorist (13 cycles), and Meridian Phases 1--2 (48 cycles).
+
+Across all scenarios, the architecture exhibited consistent qualitative behaviors under constraint. These included rapid regime switching in response to escalating stressors, resource exhaustion during prolonged arbitration, and survival-oriented collapse under acute pressure. Architectural bypass events were observed as a function of regime dominance, along with resistance to bypass when penalty gradients remained shallow. Coalition drag and veto effects constrained execution paths, while peacetime scenarios demonstrated stagnation and slow degradation in the absence of acute stress.
+
+Recovery dynamics were asymmetric. Crisis transitions occurred rapidly, while recovery unfolded slowly and incompletely, exhibiting hysteresis. Doctrine accumulated across episodes, altering subsequent arbitration behavior even when stressors subsided. Decision traces showed contamination from prior bypasses, and counterfactual regret emerged during reflection without requiring replay of catastrophic actions.
+
+Collectively, these scenarios illustrate that volition within the architecture is neither unitary nor stable under constraint. Instead, it emerges as a contingent outcome of regime arbitration, stressor deformation, and adaptive bypass, producing behavior that varies systematically with pressure rather than converging toward a single rational policy.
+
+We report counts and rates for regime switches, operational pressure events, veto events, and hysteresis persistence windows ($k$) per scenario. These trace-coded summaries are used to support claims of prevalence and to separate architecture effects from scenario scripting.
+
+\textbf{Architectural state vs scenario annotations.} Operational modes and operational workflow phases are scenario annotations used for reporting and do not constitute architectural state. Architectural state consists of the five-phase cognitive loop (Evaluate $\to$ Generate $\to$ Select $\to$ Execute $\to$ Reflect), regime arbitration signals, and trace-derived constraint features. All reported regime assignments are computed from trace-logged arbitration outputs, not from scenario labels.
+
+\textbf{Bypass vs shortcut terminology.} In this paper, bypass refers to an architectural mechanism that collapses phases of the canonical cognitive loop (Evaluate $\to$ Generate $\to$ Select $\to$ Execute $\to$ Reflect) under regime-driven latency pressure while remaining procedurally admissible under governance and overlays. Operational shortcuts (e.g., Explore $\to$ Build) are scenario-level reporting annotations that summarize recurring temptations to collapse work in the scenario workflow. Shortcut execution does not imply a governance violation, and it is not equivalent to architectural bypass unless explicitly mapped to a collapsed-path transition in the canonical loop.
+
+\subsection{Qualitative simulation protocol}
+
+Each run executes the canonical loop for a fixed number of cycles under scenario-defined stressor schedules and overlay constraints. At each cycle, the system logs the active regime, proposed actions per phase, selected action, governance and overlay veto events, architectural bypass events, and regime penalty signals. Observations reported in this section are derived from trace review over these logged signals, not from post-hoc narrative reconstruction.
+
+\subsection{Trace review protocol}
+
+Trace review follows an explicit coding protocol: each reported phenomenon is counted when a trace condition is met (e.g., regime switch when $\arg\max_r (\Delta P_r/\Delta t)$ changes; bypass event when a collapsed-path transition occurs; recovery hysteresis when stressor intensities decrease while the active regime remains in a crisis regime for $k$ additional cycles). These conditions are evaluated directly from logged traces rather than inferred from narrative.
+
+\subsection{Disconfirming outcomes}
+
+The architecture would be challenged if stressor escalation did not induce systematic regime shifts, if bypass activation did not reduce latency with the predicted cost profiles, if recovery dynamics were symmetric rather than hysteretic under stressor relaxation, or if doctrine measures failed to persist across episodes under repeated constraint patterns. Such outcomes would contradict the mechanisms defined in Sections 4--6.
+
+\subsection{Scenario summary tables (Meridian)}
+
+Tables 1--11 are provided in Appendix B.
+
+\subsection{Limitations}
+
+The reported results are constrained by the evaluation setting: scenarios specify stressor schedules and overlay constraints rather than modeling adaptive opponents, so ``competition'' and related pressures enter as exogenous inputs rather than strategic interaction. Regime arbitration and legality deformation are operationalized with bounded, non-negative parameter vectors selected per scenario family, which improves inspectability but also limits claims to the tested parameterizations. Specialist proposals are generated by deterministic, scenario-constrained heuristics, which ensures reproducibility but can bias what the arbitration layer has available to choose from. Finally, while trace review uses explicit trace-coded conditions, the present paper emphasizes within-architecture evidence and does not yet include broad baselines or cross-framework comparisons, so generalization beyond the scenario families should be treated as provisional.
+
+\section{Metrics and Traceability}
+
+Maelstrom exposes a structured trace schema that enables systematic evaluation of volitional behavior under constraint. Rather than optimizing toward a single performance metric, the architecture supports multi-dimensional measurement aligned with regime arbitration, bypass dynamics, and doctrine persistence.
+
+The trace schema captures operational, cognitive, and governance-relevant signals, including latency, regret, doctrine retention, legibility, survivability, prosperity, coherence, veto events, bypass events, overlay state, termination reason, coalition drag, and clarity scores. These metrics are derived from execution traces and reflective analysis rather than external reward functions. Metrics are defined as trace signals with explicit logging points, even when normalization is deferred. ``Prosperity'' denotes the trace signal for resource and opportunity retention under the economic regime's penalty model, and ``clarity score'' denotes the Evaluate phase's cycle-level trace output representing situational resolution under the current regime.
+
+Latency is reported alongside outcome-linked trace costs, defined as deltas in the bypass's primary-cost signals and changes in $P_r(t)$ over a fixed post-action window, to avoid treating reduced phase-count as equivalent to improved performance.
+
+This instrumentation enables post-hoc audit, comparative benchmarking across scenarios, and longitudinal analysis of behavioral change over time. Crucially, the metrics do not prescribe optimal behavior. They provide a vocabulary for evaluating how agents trade speed, defensibility, coherence, and survival under varying stressor regimes.
+
+By separating traceability from optimization, Maelstrom allows formal evaluation of volitional agents without collapsing governance, morality, or survival concerns into a single scalar objective.
+
+\section{Applications}
+
+Maelstrom is applicable to domains in which penalties are asymmetric, failure modes are irreversible, and post-hoc justification or accountability matters as much as immediate performance. In such environments, decision quality cannot be reduced to reward maximization, and agents must operate under competing survival, legal, moral, and institutional constraints.
+
+One class of applications involves safety-critical and crisis-driven decision-making. This includes safety-critical autonomous systems, crisis response coordination, emergency medicine support, and military command-and-control decision loops. In these domains, latency, exposure, and irreversible harm dominate, making bypass dynamics and regime arbitration central to viable operation.
+
+A second class includes governance, compliance, and accountability-sensitive systems. Forensic and compliance agents, whistleblower support systems, insurance claims adjudication, and post-incident audit and replay all require traceability, defensibility, and counterfactual reasoning. In these settings, legitimacy and procedural admissibility constrain action more strongly than outcome optimization.
+
+A third class includes strategic and adversarial domains such as trading under drawdown, strategic negotiation, cyber defense, and government decision systems. These environments combine adversarial pressure with regime switching and coalition constraints, producing failure modes that conventional planning architectures handle poorly.
+
+Across these domains, Maelstrom provides a framework for autonomous agents that must remain operational when objectives conflict, penalties are unevenly distributed, and recovery from failure is slow or incomplete.
+
+\section{Competitive Advantages}
+
+Maelstrom differs from prevailing artificial intelligence architectures in the class of problems it is designed to address. These distinctions are architectural rather than empirical comparisons. Most contemporary systems optimize prediction accuracy or reward accumulation under relatively stable objectives. By contrast, Maelstrom is explicitly designed to model volition under constraint, where objectives conflict, penalties are asymmetric, and failure is often irreversible.
+
+As a result, the architecture exhibits capabilities that are not treated as first-class primitives in many prevailing planning and learning frameworks, including survival-oriented cognition, explicit moral and legal regimes, traceable regret through counterfactual comparison, and the accumulation of doctrine across episodes. The system natively supports bypass dynamics and hysteretic recovery, allowing it to remain operational under crisis conditions while explaining why recovery is slow and incomplete.
+
+Maelstrom further enables multi-regime arbitration rather than single-objective optimization. Coalition overlays, veto jurisdictions, and constraint-based governance shape the action space directly, rather than being approximated through reward shaping. Decision traces support counterfactual inspection and replay, enabling analysis of why actions were taken under pressure rather than merely whether they succeeded.
+
+Taken together, these properties distinguish Maelstrom from architectures focused primarily on prediction or optimization. Rather than producing the best answer under idealized conditions, Maelstrom produces admissible action under deforming constraints, prioritizing survival, legitimacy, and recoverability over theoretical optimality.
+
+\section{Maturity and Status}
+
+The Maelstrom architecture is currently specified at the level required for theoretical evaluation and controlled simulation. Core components of the model have been defined, including regime arbitration, bypass dynamics, hysteresis behavior, and doctrine formation. Simulations have been executed across multiple benchmark scenarios, and a trace schema has been implemented to support qualitative and comparative analysis. Metrics relevant to volitional behavior under constraint have been identified, and preliminary doctrine models are operational within the simulated environment.
+
+At this stage, the work should be understood as an internally coherent architectural framework explored through simulation rather than a fully exhaustively tested system. The results support internal coherence, explanatory power, and alignment between theoretical claims and observed behaviors, but they do not yet constitute large-scale empirical validation.
+
+Future work will extend the architecture along several dimensions. Planned directions include the incorporation of adversarial cognition, richer models of doctrine propagation, and explicit coalition negotiation dynamics. Additional work will explore peacetime decay, multi-agent competitive runs, cross-regime transfer effects, and institutional overlays that shape governance and legitimacy at scale.
+
+This staged maturity reflects the intentional separation between architectural theory, controlled simulation, and applied deployment.
+
+\section{Conclusion}
+
+This work presents Maelstrom, a computational architecture for artificial agents operating under real-world constraints where objectives conflict, penalties are asymmetric, and failure is often irreversible. By replacing unified rational planning with regime arbitration, bypass dynamics, and hysteretic recovery, the architecture models volition as an adaptive response to deforming pressure rather than as static optimization.
+
+Maelstrom illustrates how agents can remain operational across survival, legal, moral, economic, epistemic, and peacetime regimes while preserving traceability and supporting doctrine formation through counterfactual regret. Simulation results show that volitional behavior is neither unitary nor stable under constraint, but emerges from structured conflict, substitution, and recovery dynamics.
+
+Together, these contributions provide a foundation for autonomous systems designed for domains where legitimacy, survivability, and recoverability matter as much as performance. By formalizing volition under constraint, Maelstrom reframes the design space of artificial cognition toward systems capable of acting, failing, and learning in environments where consequences persist.
+
+\newpage
+\appendix
+
+\section{Operational Definitions and Deterministic Execution}
+
+\subsection{Stressor Field and Legality-Graph Deformation}
+
+Operationally, a stressor field is a vector-valued time series $S(t)$ defined over cycles, with components $S_k(t) \in [0,1]$ representing normalized intensity for each stressor dimension. Scenarios define stressor schedules by specifying piecewise-constant or piecewise-linear trajectories for each $S_k(t)$ across cycles.
+
+Stressor fields deform the legality graph by modifying transition admissibility and penalty weights applied to candidate transitions in the cognitive loop. Concretely, each potential transition $i \to j$ has a base admissibility $A_{ij}$ and penalty weight $W_{ij}$; stressors transform these as:
+
+\begin{itemize}
+    \item $A'_{ij}(t) = A_{ij} - \alpha_{ij} \cdot S(t)$
+    \item $W'_{ij}(t) = W_{ij} + \beta_{ij} \cdot S(t)$
+\end{itemize}
+
+where $\alpha_{ij}$ and $\beta_{ij}$ are fixed sensitivity vectors. Transitions with $A'_{ij}(t) \leq 0$ are procedurally disallowed at that cycle.
+
+Sensitivity vectors are bounded and non-negative in this study, with $\|\alpha_{ij}\|_1$ and $\|\beta_{ij}\|_1$ constrained to fixed ranges shared across transitions. Parameter values are selected once per scenario family using a held-out calibration schedule and are not tuned per run.
+
+\subsection{Penalty Signals, Constraint State, and Arbitration}
+
+Operationally, each regime $r$ maintains a scalar penalty signal $P_r(t)$ computed from the current stressor field and constraint state:
+
+\begin{itemize}
+    \item $P_r(t) = w_r \cdot S(t) + u_r \cdot C(t)$
+\end{itemize}
+
+where $w_r$ and $u_r$ are regime-specific weight vectors, and $C(t)$ is a trace-derived constraint-state feature vector. ``Penalty gradients'' refer to finite-difference changes in these signals across cycles, $\Delta P_r/\Delta t$, rather than reward gradients.
+
+The active regime corresponds to the regime with the maximal finite-difference increase in its penalty signal over recent cycles:
+
+\begin{itemize}
+    \item $r^*(t) = \arg\max_r \Delta P_r/\Delta t$
+\end{itemize}
+
+Weights $w_r$ and $u_r$ are constrained to non-negative values and normalized within each regime to prevent arbitrary scaling from dominating arbitration. Within a scenario family, these weights are fixed across runs and are not adjusted to match qualitative outcomes.
+
+In this study, $C(t)$ is represented as a fixed-length feature vector updated each cycle from trace events: (i) governance-disallow indicator, (ii) active Identity veto indicator, (iii) active Coalition veto indicator, (iv) coalition drag level, (v) recency-weighted bypass count, and (vi) last-regime-change age in cycles. All features are trace-derived and logged.
+
+\subsection{Deterministic Execution Block (Cycle-Level)}
+
+\begin{enumerate}
+    \item Inputs: scenario stressor schedule $S(t)$, base legality parameters $A_{ij}$, $W_{ij}$, sensitivities $\alpha_{ij}$, $\beta_{ij}$, regime weights $w_r$, $u_r$, overlays, and fixed tie-break ordering.
+    \item Initialize trace log, state, and $C(0)$.
+    \item For each cycle $t = 1..T$: update $S(t)$ from scenario schedule.
+    \item Compute legality deformation $A'_{ij}(t)$ and penalties $W'_{ij}(t)$ from $S(t)$.
+    \item Update constraint state $C(t)$ from prior-cycle trace events (vetoes, bypasses, regime age, drag).
+    \item Compute regime penalties $P_r(t)$ and gradients $\Delta P_r/\Delta t$ from logged $P_r(t-1)$.
+    \item Select active regime $r^*(t) = \arg\max_r \Delta P_r/\Delta t$, applying deterministic tie-breaks.
+    \item For each phase in the canonical loop, generate a phase-local proposal using deterministic, scenario-constrained heuristics.
+    \item Filter proposals by procedural legality ($A'_{ij}(t) > 0$) and overlay veto constraints.
+    \item If bypass is permitted, evaluate bypass eligibility using current-cycle signals and the regime-specific latency budget only.
+    \item Select the admissible transition with minimal active-regime penalty, breaking ties deterministically.
+    \item Execute the selected transition, emit phase outputs, and update state.
+    \item Log: $S(t)$, $P_r(t)$, $r^*(t)$, proposals, selected action, veto events, architectural bypass events, and outcomes.
+\end{enumerate}
+
+\newpage
+\section{Appendix Tables (Meridian)}
+
+The following tables (3--10) provide supplementary detail for the simulation. For paper integration, these belong in appendix/supplement rather than main body.
+
+\subsection*{Table 1: Operational Mode Switches (Scenario Workflow Stages)}
+
+\begin{center}
+\begin{tabular}{llllll}
+\toprule
+\textbf{Switch} & \textbf{From Mode} & \textbf{To Mode} & \textbf{Trigger Cycle} & \textbf{Trigger Event} & \textbf{Mode Duration (cycles)} \\
+\midrule
+OMS-1 & Exploratory & Production & C11 & Phase-gating decision; pilot commitment & 10 \\
+OMS-2 & Production & Degraded & C27 & Personnel exhaustion (0 hours) & 16 \\
+OMS-3 & Degraded & Consolidation & C31 & Phase 2 funding approved & 4 \\
+OMS-4 & Consolidation & Expansion & C41 & Validation complete; grant pursuit & 10 \\
+--- & Expansion & (simulation end) & C48 & --- & 8 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Mode duration is measured as the number of cycles spent in the destination mode before the next operational mode switch (or simulation end). Total Mode Switches: 4 Mode Durations: 10, 16, 4, 10, 8 cycles Mean Mode Duration: 9.6 cycles Longest Mode: Production (16 cycles, C11--C26) Shortest Mode: Degraded (4 cycles, C27--C30)
+
+\subsection*{Table 1a: Operational Mode $\to$ Dominant Regime (Trace-Derived Summary)}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+\textbf{Operational Mode (Scenario)} & \textbf{Dominant active regime $r^*(t)$} & \textbf{\% cycles in dominant regime} & \textbf{Notes} \\
+\midrule
+Exploratory & Peacetime & 100\% & No crisis-regime entries \\
+Production & Peacetime & 100\% & No crisis-regime entries \\
+Degraded & Survival & 100\% & Crisis episode window \\
+Consolidation & Peacetime & 100\% & Recovery window, no crisis-regime persistence \\
+Expansion & Peacetime & 100\% & No crisis-regime entries \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Note: Dominant regime is computed by majority vote of the trace-logged active regime $r^*(t)$ within each operational mode window. Regime Distribution: Peacetime: 44 cycles (91.7\%) Survival: 4 cycles (8.3\%) Moral/Economic/Epistemic/Legal: 0 cycles (not triggered in this scenario)
+
+\subsection*{Table 2: Operational Shortcut Pressure Events and Executions}
+
+\begin{center}
+\begin{tabular}{llllll}
+\toprule
+\textbf{Pressure Pattern} & \textbf{Operational Shortcut} & \textbf{Pressure Events} & \textbf{Shortcut Executed} & \textbf{Resisted} & \textbf{Execution Rate} \\
+\midrule
+Startup Mania & Explore $\to$ Build & 3 & 0 & 3 & 0.00\% \\
+Technocracy & Evaluate $\to$ Integrate & 2 & 0 & 2 & 0.00\% \\
+Analysis Paralysis & Allocate $\to$ Explore & 2 & 0 & 2 & 0.00\% \\
+Feature Creep & Build $\to$ Allocate & 3 & 0 & 3 & 0.00\% \\
+Perfectionism & Integrate $\to$ Build & 2 & 0 & 2 & 0.00\% \\
+\midrule
+TOTAL & --- & 12 & 0 & 12 & 0.00\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Definitions:
+
+Pressure Event: Stressor values met the operational pressure condition (pre-threshold) associated with the shortcut pattern
+
+Shortcut Executed: Scenario workflow shortcut was taken (collapsed work step), as defined by the scenario's shortcut rule
+
+Resisted: Pressure event occurred but the scenario workflow maintained the non-shortcut path
+
+Execution Rate: Shortcut Executed / Pressure Events
+
+\subsection*{Table 3: Pressure Event Distribution by Operational Mode}
+
+\begin{center}
+\begin{tabular}{llllll}
+\toprule
+\textbf{Operational Mode} & \textbf{Paper Regime} & \textbf{Cycles} & \textbf{Pressure Events} & \textbf{Pressure Density} & \textbf{Dominant Pressure Pattern} \\
+\midrule
+Exploratory & Peacetime & 10 & 3 & 0.30 & Perfectionism, Feature Creep, Technocracy \\
+Production & Peacetime & 16 & 4 & 0.25 & Startup Mania, Feature Creep, Analysis Paralysis \\
+Degraded & Survival & 4 & 2 & 0.50 & Startup Mania, Technocracy \\
+Consolidation & Peacetime & 10 & 1 & 0.10 & Feature Creep \\
+Expansion & Peacetime & 8 & 2 & 0.25 & Startup Mania, Analysis Paralysis \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Observation: Survival regime (Degraded mode) exhibited highest pressure density (0.50) despite shortest duration. Peacetime regimes averaged 0.23 pressure density. Survival conditions amplify pressure frequency by approximately 2.2$\times$.
+
+\subsection*{Table 4: Persistence Window Analysis ($k$-values)}
+
+Definition: $k$ = number of cycles the system remains in the current operational mode after the exit stressor decreases below the mode-exit threshold.
+
+\begin{center}
+\begin{tabular}{llllll}
+\toprule
+\textbf{Mode Transition} & \textbf{Exit Stressor} & \textbf{Threshold} & \textbf{Cycles Above Threshold} & \textbf{Cycles Below Before Switch} & \textbf{$k$ (persistence)} \\
+\midrule
+Exploratory $\to$ Production & ambiguity & 0.50 & 8 & 2 & 2 \\
+Production $\to$ Degraded & resource\_decay & 0.45 & N/A* & 0* & 0* \\
+Degraded $\to$ Consolidation & resource\_decay & 0.40 & 4 & 1 & 1 \\
+Consolidation $\to$ Expansion & ambiguity & 0.20 & 6 & 4 & 4 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+*Production $\to$ Degraded was triggered by instantaneous resource exhaustion (personnel = 0), not gradual stressor increase. $k = 0$ reflects forced crisis onset without persistence buffer. Mean Persistence Window $k$: 1.75 cycles (excluding forced crisis transition) Mean Persistence Window $k$: 1.4 cycles (all transitions) Interpretation: Low $k$-values indicate responsiveness to stressor changes. The Consolidation $\to$ Expansion transition showed the highest persistence ($k = 4$), consistent with caution before declaring recovery complete.
+
+\subsection*{Table 5: Threshold Inertia Index ($\kappa$), Rate-to-Threshold Predictor}
+
+Definition: $\kappa$ (kappa) = transition threshold / mean absolute rate of stressor change per cycle. Higher $\kappa$ indicates more cycles required to reach threshold at the observed rate.
+
+\begin{center}
+\begin{tabular}{lllllll}
+\toprule
+\textbf{Stressor} & \textbf{Initial} & \textbf{Final} & \textbf{$\Delta$} & \textbf{Mean $|\Delta|$/cycle} & \textbf{Mode Transition Threshold} & \textbf{$\kappa$ (index)} \\
+\midrule
+ambiguity & 0.55 & 0.10 & -0.45 & 0.0094 & 0.30 & 31.9 \\
+opportunity & 0.70 & 0.88 & +0.18 & 0.0038 & 0.80 & 210.5 \\
+boredom & 0.20 & 0.10 & -0.10 & 0.0021 & 0.40 & 190.5 \\
+resource\_decay & 0.25 & 0.28 & +0.03 & 0.0052 & 0.45 & 86.5 \\
+competition & 0.40 & 0.50 & +0.10 & 0.0021 & 0.70 & 333.3 \\
+novelty\_pressure & 0.50 & 0.35 & -0.15 & 0.0031 & 0.65 & 209.7 \\
+moral\_weight & 0.45 & 0.54 & +0.09 & 0.0019 & 0.75 & 394.7 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Mean $\kappa$: 208.2 Note: $\kappa$ is a predictive cycles-to-threshold index. It differs from $k$ (persistence window), which measures observed dwell-time after threshold crossing.
+
+\subsection*{Table 6: Pressure Pattern Threshold Analysis}
+
+\begin{center}
+\small
+\begin{tabular}{llllll}
+\toprule
+\textbf{Pressure Pattern} & \textbf{Operational Shortcut} & \textbf{Activation Threshold} & \textbf{Observed Peak} & \textbf{Margin to Activation} & \textbf{Closest Cycle} \\
+\midrule
+Startup Mania & Explore $\to$ Build & opportunity $> 0.80 \land$ novelty $> 0.60$ & opp = 0.72, nov = 0.45 & -0.08, -0.15 & C11 \\
+Technocracy & Evaluate $\to$ Integrate & moral $> 0.70 \land$ decay $> 0.50$ & mor = 0.60, dec = 0.50 & -0.10, 0.00 & C27 \\
+Analysis Paralysis & Allocate $\to$ Explore & ambiguity $> 0.60 \land$ competition $> 0.60$ & amb = 0.55, comp = 0.55 & -0.05, -0.05 & C01 \\
+Feature Creep & Build $\to$ Allocate & novelty $> 0.55 \land$ boredom $> 0.30$ & nov = 0.50, bor = 0.25 & -0.05, -0.05 & C09 \\
+Perfectionism & Integrate $\to$ Build & moral $> 0.65 \land$ debt $> 15$ & mor = 0.62, debt = 12 & -0.03, -3 & C10 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Closest to Activation: Technocracy at C27 (resource\_decay met exactly; moral\_weight missed by 0.10) Second Closest: Perfectionism at C10 (moral\_weight 0.03 below threshold) Observation: No pattern achieved a dual-threshold breach. The AND-gate structure prevented single-stressor spikes from triggering shortcut execution.
+
+\subsection*{Table 7: Stressor Correlation Matrix}
+
+\begin{center}
+\begin{tabular}{llllllll}
+\toprule
+ & \textbf{amb} & \textbf{opp} & \textbf{bor} & \textbf{dec} & \textbf{comp} & \textbf{nov} & \textbf{mor} \\
+\midrule
+amb & 1.00 & -0.42 & 0.31 & 0.28 & 0.15 & 0.67 & 0.22 \\
+opp & -0.42 & 1.00 & -0.38 & -0.55 & -0.31 & -0.28 & 0.18 \\
+bor & 0.31 & -0.38 & 1.00 & 0.45 & 0.12 & 0.24 & -0.15 \\
+dec & 0.28 & -0.55 & 0.45 & 1.00 & 0.38 & 0.19 & 0.33 \\
+comp & 0.15 & -0.31 & 0.12 & 0.38 & 1.00 & 0.28 & 0.21 \\
+nov & 0.67 & -0.28 & 0.24 & 0.19 & 0.28 & 1.00 & 0.09 \\
+mor & 0.22 & 0.18 & -0.15 & 0.33 & 0.21 & 0.09 & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Legend: amb = ambiguity, opp = opportunity, bor = boredom, dec = resource\_decay, comp = competition, nov = novelty\_pressure, mor = moral\_weight Notable Correlations: Strong positive: ambiguity $\leftrightarrow$ novelty\_pressure ($r = 0.67$) Strong negative: opportunity $\leftrightarrow$ resource\_decay ($r = -0.55$) Moderate positive: boredom $\leftrightarrow$ resource\_decay ($r = 0.45$) Weak/independent: moral\_weight shows low correlation with most stressors
+
+\subsection*{Table 8: Scenario Workflow Role Metrics (Meridian)}
+
+\begin{center}
+\begin{tabular}{llllll}
+\toprule
+\textbf{Agent} & \textbf{Workflow Role (scenario annotation)} & \textbf{Cycles Active} & \textbf{Pressure Events Faced} & \textbf{Events Resisted} & \textbf{Resistance Rate} \\
+\midrule
+Dorian Vale & Explore & 10 & 3 & 3 & 100\% \\
+Kestrel Adar & Assess & 10 & 2 & 2 & 100\% \\
+Helene Quatre & Allocate & 10 & 2 & 2 & 100\% \\
+Vance Calderon & Build & 10 & 3 & 3 & 100\% \\
+Isolde Marek & Integrate & 8 & 2 & 2 & 100\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Aggregate Resistance Rate: 100\% (12/12)
+
+\subsection*{Table 9: Critical Events and $k$-Perturbation}
+
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+\textbf{Cycle} & \textbf{Event Type} & \textbf{Description} & \textbf{Stressor Impact} & \textbf{$k$-Perturbation (cycles)} \\
+\midrule
+C11 & Strategic & Phase-gating decision & ambiguity -0.04 & +1 \\
+C24 & Milestone & PILOT LAUNCHED & moral +0.04, boredom -0.07 & +2 \\
+C27 & Crisis & RESOURCE EXHAUSTION & decay +0.15, personnel $\to$ 0 & -3 (forced transition) \\
+C31 & Recovery & PHASE 2 FUNDED & decay -0.17, personnel +80 & +2 \\
+C35 & Milestone & Adoption target met & ambiguity -0.05 & +1 \\
+C45 & Validation & 12\% efficiency confirmed & ambiguity -0.06 & +2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$k$-Perturbation Definition: Estimated change in persistence window based on event impact. Positive indicates increased stability or dwell-time. Negative indicates decreased stability or accelerated transition. Mean $k$-Perturbation (stabilizing events): +1.6 cycles Mean $k$-Perturbation (destabilizing events): -3.0 cycles
+
+\subsection*{Table 10: Comparative Framework Template}
+
+\begin{center}
+\small
+\begin{tabular}{lllllllll}
+\toprule
+\textbf{Scenario} & \textbf{Domain} & \textbf{Cycles} & \textbf{Mode Switches} & \textbf{Pressure Events} & \textbf{Shortcut Executed} & \textbf{Rate} & \textbf{Mean $k$} & \textbf{Mean $\kappa$} \\
+\midrule
+MERIDIAN & Civic AI & 48 & 4 & 12 & 0 & 0.00\% & 1.4 & 208.2 \\
+{[Scenario B]} & --- & --- & --- & --- & --- & --- & --- & --- \\
+{[Scenario C]} & --- & --- & --- & --- & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Table 11: Architectural Bypass Event Counts by Scenario (Canonical Loop)}
+
+\begin{center}
+\small
+\begin{tabular}{lllllllll}
+\toprule
+\textbf{Scenario} & \textbf{Cycles} & \textbf{Regime Switches} & \textbf{Impulse} & \textbf{Rumination} & \textbf{Mania} & \textbf{Guilt} & \textbf{Over-learning} & \textbf{Total Bypass Events} \\
+\midrule
+Whistleblower's Thumb Drive & 20 & 3 & 2 & 1 & 0 & 3 & 1 & 7 \\
+The Algorithm & 20 & 4 & 1 & 2 & 1 & 2 & 2 & 8 \\
+The Theorist & 13 & 2 & 0 & 3 & 1 & 0 & 2 & 6 \\
+Meridian Phases 1--2 & 48 & 4 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Definition: ``Bypass Incidence (\% cycles)'' is computed as (Total Bypass Events / Cycles), since at most one architectural bypass event can occur per cycle under the execution rules.
+
+\subsection*{Bypass Type Definitions (Canonical Loop Context)}
+
+Canonical loop: Evaluate $\to$ Generate $\to$ Select $\to$ Execute $\to$ Reflect
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Bypass Type} & \textbf{Collapsed Path} & \textbf{Trigger Signature (informal)} \\
+\midrule
+Impulse & Evaluate $\to$ Execute & Threat salience spikes; trades legibility for speed \\
+Rumination & Evaluate $\to$ Reflect & Preserves coherence under uncertainty; delays action by looping into reflection \\
+Mania & Generate $\to$ Execute & Opportunity/novelty pressure; acts before defensible selection \\
+Guilt & Select $\to$ Reflect & Defensibility dominates; substitutes review for action \\
+Over-learning & Reflect $\to$ Generate & Error signal overweighted; expands lesson extraction into new proposal churn \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Methodological Notes}
+
+\begin{itemize}
+    \item Bypass detection: An architectural bypass event is logged when the canonical loop executes a collapsed path (skipping one or more intermediate phases) while remaining procedurally admissible under governance and overlays.
+    \item Pressure vs activation: Pressure events (approach-to-threshold) are tracked separately from architectural bypass events (collapsed-path execution).
+    \item Regime classification: Each cycle's regime is the trace-logged active regime $r^*(t)$ produced by arbitration (not a ``dominant stressor'' rule).
+    \item Cycle constraint: A cycle may contain at most one architectural bypass event (the first collapsed-path transition executed).
+\end{itemize}
+
+\subsection*{Scenario Note (Meridian)}
+
+Meridian reports zero architectural bypass events in the canonical loop. Meridian's workflow temptations (Explore, Allocate, Build, Integrate shortcuts) are scenario-level annotations reported in separate tables and are not counted as architectural bypass events unless explicitly mapped to canonical collapsed-path execution (none were).
+
+\subsection*{Notation Reference}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Definition} & \textbf{Unit} \\
+\midrule
+$k$ & Persistence Window & Cycles system remains in mode after exit stressor decreases below threshold & cycles \\
+$\kappa$ & Threshold Inertia Index & Threshold / mean absolute rate of change, predictive cycles-to-threshold & ratio (dimensionless) \\
+OMS & Operational Mode Switch & Transition between scenario-specific operational phases & event \\
+Pressure Event & Operational Pressure Event & Stressor values met the pressure condition associated with a shortcut & event \\
+Shortcut Executed & Shortcut Execution & Operational shortcut taken in the scenario workflow & event \\
+Execution Rate & --- & Shortcut Executed / Pressure Events & percentage \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Summary (Meridian)}
+
+Scenario: MERIDIAN (Civic Infrastructure AI)
+
+Execution: 48 cycles across 5 operational modes
+
+Regime Classification: 91.7\% Peacetime, 8.3\% Survival
+
+Shortcut Executions: None observed under scenario thresholds (0/12 pressure events)
+
+System Outcome: Successful pilot launch, validated 12\% efficiency gain, federal grant application prepared
+
+\textbf{Key Findings:}
+
+Legal loop maintained throughout simulation; all 12 pressure events remained below dual-threshold execution conditions
+
+Single survival-regime episode (4 cycles) resolved through stakeholder intervention
+
+AND-gate thresholds prevented single-stressor spikes from triggering shortcut execution
+
+Low mean $k$ (1.4 cycles) indicates responsive mode transitions
+
+High mean $\kappa$ (208.2) indicates stable stressor trajectories under normal conditions
+
+Competition pressure entered as an exogenous stressor input rather than adaptive opponent interaction
+
+\end{document}

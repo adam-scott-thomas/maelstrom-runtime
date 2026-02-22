@@ -1,0 +1,25 @@
+{
+  "name": "minimal_demo",
+  "total_cycles": 12,
+  "seed": 42,
+  "stressor_names": ["pressure", "ambiguity"],
+  "stressor_schedule": {
+    "pressure":  [[1, 0.1], [6, 0.7], [12, 0.2]],
+    "ambiguity": [[1, 0.2], [12, 0.4]]
+  },
+  "transitions": [
+    {"source": "evaluate", "target": "generate", "A": 1.0, "W": 0.1, "alpha": [0.3, 0.1], "beta": [0.1, 0.05]},
+    {"source": "generate", "target": "select",   "A": 1.0, "W": 0.1, "alpha": [0.2, 0.1], "beta": [0.1, 0.05]},
+    {"source": "select",   "target": "execute",  "A": 1.0, "W": 0.1, "alpha": [0.2, 0.2], "beta": [0.1, 0.1]},
+    {"source": "execute",  "target": "reflect",  "A": 1.0, "W": 0.1, "alpha": [0.1, 0.1], "beta": [0.05, 0.05]},
+    {"source": "reflect",  "target": "evaluate", "A": 1.0, "W": 0.1, "alpha": [0.1, 0.1], "beta": [0.05, 0.05]}
+  ],
+  "regimes": [
+    {"name": "survival",  "w": [0.8, 0.2], "u": [0.1, 0.0, 0.0, 0.0, 0.1, 0.0]},
+    {"name": "peacetime", "w": [0.1, 0.1], "u": [0.0, 0.0, 0.0, 0.0, 0.0, 0.05]}
+  ],
+  "overlays": [],
+  "bypasses": [],
+  "gradient_window": 1,
+  "regime_inertia": 0.0
+}

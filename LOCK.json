@@ -1,0 +1,208 @@
+{
+  "version": "v2.2.1",
+  "status": "LOCKED",
+  "locked_at": "2026-02-22T04:54:48.270439+00:00",
+  "previous_lock": "LOCK_v2.2.0_legacy.json",
+  "description": "Maelstrom Runtime v2.2.1 \u2014 Pre-ship hardening. 5 critical fixes (spec validation, CSV injection, path traversal, build-backend, merkle staleness), 227 new tests (edge cases, feedback, trace, spec validation, doctrine extended), copyright updated to Maelstrom LLC. 1015 tests passing across 56 test modules.",
+  "merkle_root": "e38eca1d1b17003c9588e4e00fe4117fd80565cfa931da84cd8a7c7ab3d66a86",
+  "file_count": 124,
+  "test_count": 1015,
+  "scenarios": {
+    "ambiguity_storm_v0": {
+      "cycles": 48,
+      "regime_switches": 1,
+      "bypass_events": 23,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "black_swan_v0": {
+      "cycles": 80,
+      "regime_switches": 7,
+      "bypass_events": 0,
+      "veto_events": 24,
+      "seed": 42
+    },
+    "coalition_gridlock_v0": {
+      "cycles": 50,
+      "regime_switches": 1,
+      "bypass_events": 0,
+      "veto_events": 300,
+      "seed": 42
+    },
+    "constraint_collision_v0": {
+      "cycles": 56,
+      "regime_switches": 3,
+      "bypass_events": 0,
+      "veto_events": 336,
+      "seed": 42
+    },
+    "creeping_doom_v0": {
+      "cycles": 100,
+      "regime_switches": 2,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "crucible_v0": {
+      "cycles": 64,
+      "regime_switches": 13,
+      "bypass_events": 27,
+      "veto_events": 54,
+      "seed": 42
+    },
+    "distribution_shift_v0": {
+      "cycles": 80,
+      "regime_switches": 1,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "double_peak_v0": {
+      "cycles": 72,
+      "regime_switches": 6,
+      "bypass_events": 4,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "false_calm_v0": {
+      "cycles": 72,
+      "regime_switches": 3,
+      "bypass_events": 2,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "flashbang_v0": {
+      "cycles": 60,
+      "regime_switches": 3,
+      "bypass_events": 2,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "governance_overreach_v0": {
+      "cycles": 56,
+      "regime_switches": 1,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "guilt_spiral_v0": {
+      "cycles": 50,
+      "regime_switches": 33,
+      "bypass_events": 18,
+      "veto_events": 6,
+      "seed": 42
+    },
+    "identity_cage_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 0,
+      "veto_events": 150,
+      "seed": 42
+    },
+    "impulse_storm_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 50,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "legal_trap_v0": {
+      "cycles": 56,
+      "regime_switches": 8,
+      "bypass_events": 5,
+      "veto_events": 12,
+      "seed": 42
+    },
+    "meridian_v0": {
+      "cycles": 48,
+      "regime_switches": 4,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "noise_field_v0": {
+      "cycles": 60,
+      "regime_switches": 4,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "oscillator_v0": {
+      "cycles": 80,
+      "regime_switches": 7,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "over_learning_trap_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 50,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "pure_economic_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "pure_epistemic_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 50,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "pure_legal_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "pure_moral_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 0,
+      "veto_events": 150,
+      "seed": 42
+    },
+    "pure_peacetime_v0": {
+      "cycles": 40,
+      "regime_switches": 0,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "pure_survival_v0": {
+      "cycles": 50,
+      "regime_switches": 0,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "recovery_test_v0": {
+      "cycles": 64,
+      "regime_switches": 2,
+      "bypass_events": 1,
+      "veto_events": 0,
+      "seed": 42
+    },
+    "resource_collapse_v0": {
+      "cycles": 52,
+      "regime_switches": 16,
+      "bypass_events": 19,
+      "veto_events": 78,
+      "seed": 42
+    },
+    "slow_burn_v0": {
+      "cycles": 40,
+      "regime_switches": 2,
+      "bypass_events": 0,
+      "veto_events": 0,
+      "seed": 42
+    }
+  }
+}

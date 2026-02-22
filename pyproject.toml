@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maelstrom-runtime"
+version = "2.2.0"
+description = "Reference implementation of the Maelstrom Runtime cognitive architecture"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+
+[tool.setuptools.packages.find]
+include = ["maelstrom*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

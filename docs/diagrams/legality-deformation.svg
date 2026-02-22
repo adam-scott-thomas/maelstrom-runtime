@@ -1,0 +1,467 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1150" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#4a7ab5"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#cc3333"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#8855aa"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#cc8800"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#55883b"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#008899"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#999"/>
+    </marker>
+    <marker id="arrow-new" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#1565c0"/>
+    </marker>
+    <marker id="arrow-fig" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#6a1b9a"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="1150" fill="#fafafa" rx="8"/>
+
+  <!-- Title -->
+  <text x="600" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">Maelstrom Cognitive Architecture — Full Data Flow</text>
+  <text x="600" y="58" text-anchor="middle" font-size="12" fill="#777">Deterministic Execution Block (Whitepaper A.3) + Export Pipeline + Figure Pipeline</text>
+
+  <!-- ======================================================== -->
+  <!-- STRESSOR FIELD S(t) -->
+  <!-- ======================================================== -->
+  <rect x="340" y="75" width="460" height="55" rx="8" fill="#fff8e1" stroke="#e6a800" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="570" y="96" text-anchor="middle" font-size="13" font-weight="bold" fill="#b38600">Stressor Field S(t)</text>
+  <text x="570" y="114" text-anchor="middle" font-size="9" fill="#997a00">time_pressure | ambiguity | threat_level | moral_weight | failure_count | boredom | opportunity | competition | novelty | resource_decay | inertia</text>
+
+  <!-- Spec Input -->
+  <rect x="40" y="80" width="110" height="50" rx="6" fill="#f0f0f0" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
+  <text x="95" y="101" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Spec JSON</text>
+  <text x="95" y="118" text-anchor="middle" font-size="9" fill="#888">scenario input</text>
+  <line x1="150" y1="105" x2="338" y2="100" stroke="#999" stroke-width="1" marker-end="url(#arrow-gray)"/>
+
+  <!-- ======================================================== -->
+  <!-- REGIME ARBITRATION — Left -->
+  <!-- ======================================================== -->
+  <rect x="20" y="155" width="235" height="330" rx="10" fill="#fff8e1" fill-opacity="0.3" stroke="#e6a800" stroke-width="1" stroke-dasharray="4"/>
+  <text x="138" y="178" text-anchor="middle" font-size="14" font-weight="bold" fill="#b38600">Regime Arbitration</text>
+
+  <rect x="35" y="190" width="205" height="42" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="1"/>
+  <text x="138" y="207" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6800">Penalty Signal</text>
+  <text x="138" y="223" text-anchor="middle" font-size="9" fill="#997a00">P_r(t) = w_r . S(t) + u_r . C(t)</text>
+
+  <rect x="35" y="245" width="205" height="38" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="1"/>
+  <text x="138" y="262" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6800">Gradient</text>
+  <text x="138" y="276" text-anchor="middle" font-size="9" fill="#997a00">dP_r/dt (smoothed window)</text>
+
+  <rect x="35" y="296" width="205" height="48" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="1"/>
+  <text x="138" y="313" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6800">r*(t) = argmax dP_r/dt</text>
+  <text x="138" y="327" text-anchor="middle" font-size="9" fill="#997a00">+ asymmetric inertia</text>
+  <text x="138" y="339" text-anchor="middle" font-size="9" fill="#997a00">+ deterministic tiebreak</text>
+
+  <!-- Regime badges -->
+  <rect x="35" y="360" width="62" height="22" rx="4" fill="#cc3333" fill-opacity="0.15" stroke="#cc3333" stroke-width="0.8"/>
+  <text x="66" y="375" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">SURVIVAL</text>
+  <rect x="103" y="360" width="46" height="22" rx="4" fill="#4a7ab5" fill-opacity="0.15" stroke="#4a7ab5" stroke-width="0.8"/>
+  <text x="126" y="375" text-anchor="middle" font-size="8" font-weight="bold" fill="#4a7ab5">LEGAL</text>
+  <rect x="155" y="360" width="50" height="22" rx="4" fill="#55883b" fill-opacity="0.15" stroke="#55883b" stroke-width="0.8"/>
+  <text x="180" y="375" text-anchor="middle" font-size="8" font-weight="bold" fill="#55883b">MORAL</text>
+  <rect x="35" y="388" width="66" height="22" rx="4" fill="#cc8800" fill-opacity="0.15" stroke="#cc8800" stroke-width="0.8"/>
+  <text x="68" y="403" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc8800">ECONOMIC</text>
+  <rect x="107" y="388" width="66" height="22" rx="4" fill="#8855aa" fill-opacity="0.15" stroke="#8855aa" stroke-width="0.8"/>
+  <text x="140" y="403" text-anchor="middle" font-size="8" font-weight="bold" fill="#8855aa">EPISTEMIC</text>
+  <rect x="179" y="388" width="61" height="22" rx="4" fill="#666" fill-opacity="0.12" stroke="#666" stroke-width="0.8"/>
+  <text x="210" y="403" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">PEACE</text>
+
+  <!-- Inertia box -->
+  <rect x="40" y="425" width="195" height="45" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="0.8" stroke-dasharray="3"/>
+  <text x="138" y="441" text-anchor="middle" font-size="9" font-weight="bold" fill="#997a00">Asymmetric Inertia</text>
+  <text x="138" y="455" text-anchor="middle" font-size="8" fill="#997a00">out_of_X: stickiness | into_X: entry barrier</text>
+  <text x="138" y="465" text-anchor="middle" font-size="8" fill="#997a00">survival: easy in, hard out</text>
+
+  <!-- Arrows within regime -->
+  <line x1="138" y1="232" x2="138" y2="243" stroke="#e6a800" stroke-width="1" marker-end="url(#arrow-orange)"/>
+  <line x1="138" y1="283" x2="138" y2="294" stroke="#e6a800" stroke-width="1" marker-end="url(#arrow-orange)"/>
+
+  <!-- S(t) to penalty -->
+  <path d="M340,102 L260,102 L260,198 L237,198" fill="none" stroke="#e6a800" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-orange)"/>
+
+  <!-- ======================================================== -->
+  <!-- CORE COGNITIVE LOOP — Center Pentagon -->
+  <!-- ======================================================== -->
+  <ellipse cx="580" cy="205" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="580" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">EVALUATE</text>
+  <text x="580" y="216" text-anchor="middle" font-size="8" fill="#4a7ab5">Kestrel Adar</text>
+
+  <ellipse cx="735" cy="315" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="735" y="310" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">GENERATE</text>
+  <text x="735" y="326" text-anchor="middle" font-size="8" fill="#4a7ab5">Dorian Vale</text>
+
+  <ellipse cx="695" cy="450" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="695" y="445" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">SELECT</text>
+  <text x="695" y="461" text-anchor="middle" font-size="8" fill="#4a7ab5">Helene Quatre</text>
+
+  <ellipse cx="465" cy="450" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="465" y="445" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">EXECUTE</text>
+  <text x="465" y="461" text-anchor="middle" font-size="8" fill="#4a7ab5">Vance Calderon</text>
+
+  <ellipse cx="425" cy="315" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="425" y="310" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">REFLECT</text>
+  <text x="425" y="326" text-anchor="middle" font-size="8" fill="#4a7ab5">Isolde Marek</text>
+
+  <!-- Canonical transitions -->
+  <line x1="635" y1="220" x2="678" y2="290" stroke="#4a7ab5" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="775" y1="340" x2="748" y2="420" stroke="#4a7ab5" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="632" y1="455" x2="530" y2="455" stroke="#4a7ab5" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="415" y1="430" x2="395" y2="348" stroke="#4a7ab5" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="470" y1="295" x2="525" y2="228" stroke="#4a7ab5" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <text x="580" y="470" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">A=0.45 (fragile)</text>
+
+  <!-- ======================================================== -->
+  <!-- BYPASS PATHS -->
+  <!-- ======================================================== -->
+  <path d="M560,235 C530,340 480,380 465,418" fill="none" stroke="#cc3333" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow-red)"/>
+  <rect x="480" y="345" width="75" height="28" rx="4" fill="white" fill-opacity="0.9" stroke="#cc3333" stroke-width="0.8"/>
+  <text x="518" y="357" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">IMPULSE</text>
+  <text x="518" y="368" text-anchor="middle" font-size="7" fill="#cc3333">E->X survival</text>
+
+  <path d="M530,220 C490,250 460,270 440,283" fill="none" stroke="#8855aa" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow-purple)"/>
+  <rect x="445" y="240" width="85" height="28" rx="4" fill="white" fill-opacity="0.9" stroke="#8855aa" stroke-width="0.8"/>
+  <text x="488" y="252" text-anchor="middle" font-size="8" font-weight="bold" fill="#8855aa">RUMINATION</text>
+  <text x="488" y="263" text-anchor="middle" font-size="7" fill="#8855aa">E->R epistemic</text>
+
+  <path d="M690,335 C640,380 540,410 510,435" fill="none" stroke="#cc8800" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow-orange)"/>
+  <rect x="580" y="385" width="65" height="28" rx="4" fill="white" fill-opacity="0.9" stroke="#cc8800" stroke-width="0.8"/>
+  <text x="613" y="397" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc8800">MANIA</text>
+  <text x="613" y="408" text-anchor="middle" font-size="7" fill="#cc8800">G->X economic</text>
+
+  <path d="M640,435 C590,400 500,370 475,340" fill="none" stroke="#55883b" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow-green)"/>
+  <rect x="545" y="375" width="60" height="28" rx="4" fill="white" fill-opacity="0.9" stroke="#55883b" stroke-width="0.8"/>
+  <text x="575" y="387" text-anchor="middle" font-size="8" font-weight="bold" fill="#55883b">GUILT</text>
+  <text x="575" y="398" text-anchor="middle" font-size="7" fill="#55883b">S->R moral</text>
+
+  <path d="M480,300 C540,270 620,270 680,290" fill="none" stroke="#008899" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow-teal)"/>
+  <rect x="545" y="265" width="90" height="28" rx="4" fill="white" fill-opacity="0.9" stroke="#008899" stroke-width="0.8"/>
+  <text x="590" y="277" text-anchor="middle" font-size="8" font-weight="bold" fill="#008899">OVER-LEARN</text>
+  <text x="590" y="288" text-anchor="middle" font-size="7" fill="#008899">R->G epistemic</text>
+
+  <!-- ======================================================== -->
+  <!-- OVERLAY VETOES — Right Side -->
+  <!-- ======================================================== -->
+  <rect x="850" y="170" width="225" height="220" rx="10" fill="#e8f5e9" fill-opacity="0.3" stroke="#55883b" stroke-width="1" stroke-dasharray="4"/>
+  <text x="963" y="193" text-anchor="middle" font-size="14" font-weight="bold" fill="#55883b">Overlay Vetoes</text>
+
+  <polygon points="963,218 1040,235 1040,275 963,292 886,275 886,235" fill="#e8f5e9" stroke="#55883b" stroke-width="1.5"/>
+  <text x="963" y="247" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e6b1e">Identity Veto</text>
+  <text x="963" y="261" text-anchor="middle" font-size="8" fill="#55883b">moral_weight > 0.85</text>
+  <text x="963" y="275" text-anchor="middle" font-size="8" fill="#55883b">blocks: execute</text>
+
+  <polygon points="963,308 1040,325 1040,365 963,382 886,365 886,325" fill="#e8f5e9" stroke="#55883b" stroke-width="1.5"/>
+  <text x="963" y="332" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e6b1e">Coalition Veto</text>
+  <text x="963" y="346" text-anchor="middle" font-size="8" fill="#55883b">competition > 0.65 AND</text>
+  <text x="963" y="358" text-anchor="middle" font-size="8" fill="#55883b">resource_decay > 0.55</text>
+  <text x="963" y="372" text-anchor="middle" font-size="8" fill="#55883b">blocks: select, execute</text>
+
+  <path d="M886,255 L530,450" fill="none" stroke="#cc3333" stroke-width="1" stroke-dasharray="3" marker-end="url(#arrow-red)"/>
+  <path d="M886,345 L758,448" fill="none" stroke="#cc3333" stroke-width="1" stroke-dasharray="3" marker-end="url(#arrow-red)"/>
+
+  <!-- ======================================================== -->
+  <!-- LEGALITY GRAPH -->
+  <!-- ======================================================== -->
+  <rect x="850" y="410" width="225" height="85" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
+  <text x="963" y="432" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Legality Deformation</text>
+  <text x="963" y="448" text-anchor="middle" font-size="9" fill="#777">A'_ij = A_ij - a_ij . S(t)</text>
+  <text x="963" y="461" text-anchor="middle" font-size="9" fill="#777">W'_ij = W_ij + b_ij . S(t)</text>
+  <text x="963" y="480" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">A' &lt;= 0 -> governance_disallow</text>
+
+  <!-- ======================================================== -->
+  <!-- CONSTRAINT STATE C(t) -->
+  <!-- ======================================================== -->
+  <rect x="20" y="510" width="220" height="115" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
+  <text x="130" y="530" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Constraint State C(t)</text>
+  <text x="38" y="548" font-size="9" fill="#777">[0] governance_disallow</text>
+  <text x="38" y="562" font-size="9" fill="#777">[1] identity_veto</text>
+  <text x="38" y="576" font-size="9" fill="#777">[2] coalition_veto / [3] drag</text>
+  <text x="38" y="590" font-size="9" fill="#777">[4] bypass_count (exp. decay 0.8)</text>
+  <text x="38" y="604" font-size="9" fill="#777">[5] regime_age</text>
+
+  <path d="M130,510 L130,500 L15,500 L15,220 L33,220" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-gray)"/>
+  <text x="18" y="370" font-size="8" fill="#999" transform="rotate(-90,18,370)">u_r . C(t)</text>
+
+  <!-- ======================================================== -->
+  <!-- DOCTRINE ENGINE -->
+  <!-- ======================================================== -->
+  <rect x="280" y="540" width="420" height="100" rx="10" fill="#f3e5f5" fill-opacity="0.3" stroke="#8855aa" stroke-width="1" stroke-dasharray="4"/>
+  <text x="490" y="560" text-anchor="middle" font-size="14" font-weight="bold" fill="#8855aa">Doctrine Engine</text>
+
+  <rect x="295" y="575" width="115" height="50" rx="6" fill="#f3e5f5" stroke="#8855aa" stroke-width="1"/>
+  <text x="353" y="593" text-anchor="middle" font-size="10" font-weight="bold" fill="#6a3d80">Regret</text>
+  <text x="353" y="607" text-anchor="middle" font-size="8" fill="#8855aa">max(counterfactual)</text>
+  <text x="353" y="619" text-anchor="middle" font-size="8" fill="#8855aa">- selected_value</text>
+
+  <rect x="425" y="575" width="115" height="50" rx="6" fill="#f3e5f5" stroke="#8855aa" stroke-width="1"/>
+  <text x="483" y="593" text-anchor="middle" font-size="10" font-weight="bold" fill="#6a3d80">Counterfactual</text>
+  <text x="483" y="607" text-anchor="middle" font-size="8" fill="#8855aa">Archive</text>
+  <text x="483" y="619" text-anchor="middle" font-size="8" fill="#8855aa">bypassed | vetoed</text>
+
+  <rect x="555" y="575" width="130" height="50" rx="6" fill="#f3e5f5" stroke="#8855aa" stroke-width="1"/>
+  <text x="620" y="593" text-anchor="middle" font-size="10" font-weight="bold" fill="#6a3d80">Doctrine</text>
+  <text x="620" y="607" text-anchor="middle" font-size="8" fill="#8855aa">sensitivity_adj</text>
+  <text x="620" y="619" text-anchor="middle" font-size="8" fill="#8855aa">regime_bias | veto_pattern</text>
+
+  <path d="M465,482 L465,500 L400,500 L400,540" fill="none" stroke="#8855aa" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-purple)"/>
+
+  <!-- ======================================================== -->
+  <!-- TRACE OUTPUT (EXISTING) -->
+  <!-- ======================================================== -->
+  <rect x="750" y="540" width="320" height="100" rx="10" fill="#f5f5f5" fill-opacity="0.3" stroke="#999" stroke-width="1" stroke-dasharray="4"/>
+  <text x="910" y="560" text-anchor="middle" font-size="14" font-weight="bold" fill="#666">Trace Output</text>
+
+  <rect x="765" y="575" width="85" height="50" rx="4" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+  <text x="808" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">trace.jsonl</text>
+  <text x="808" y="607" text-anchor="middle" font-size="8" fill="#888">1 record/cycle</text>
+  <text x="808" y="619" text-anchor="middle" font-size="8" fill="#888">append-only</text>
+
+  <rect x="860" y="575" width="95" height="50" rx="4" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+  <text x="908" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">summary.json</text>
+  <text x="908" y="607" text-anchor="middle" font-size="8" fill="#888">regime dist.</text>
+  <text x="908" y="619" text-anchor="middle" font-size="8" fill="#888">switches/vetoes</text>
+
+  <rect x="965" y="575" width="95" height="50" rx="4" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+  <text x="1013" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">trace_human</text>
+  <text x="1013" y="607" text-anchor="middle" font-size="8" fill="#888">.md narrative</text>
+  <text x="1013" y="619" text-anchor="middle" font-size="8" fill="#888">blocked switches</text>
+
+  <!-- S(t) to legality -->
+  <path d="M800,102 L963,102 L963,410" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-gray)"/>
+  <!-- S(t) to overlays -->
+  <path d="M800,102 L840,102 L840,218 L886,235" fill="none" stroke="#55883b" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-green)"/>
+  <!-- Regime to loop -->
+  <path d="M240,395 L360,315" fill="none" stroke="#e6a800" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <text x="280" y="345" font-size="8" font-weight="bold" fill="#b38600">active regime</text>
+
+  <!-- ======================================================== -->
+  <!--                                                          -->
+  <!--   EXTENDED PIPELINE — highlighted in blue/purple below   -->
+  <!--                                                          -->
+  <!-- ======================================================== -->
+
+  <!-- Extended pipeline banner -->
+  <rect x="20" y="665" width="1160" height="28" rx="6" fill="#1565c0" fill-opacity="0.08" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="600" y="684" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">Extended Pipeline (below)</text>
+
+  <!-- ======================================================== -->
+  <!-- SCENARIOS — Left -->
+  <!-- ======================================================== -->
+  <rect x="20" y="705" width="245" height="210" rx="10" fill="#fff3e0" fill-opacity="0.3" stroke="#e65100" stroke-width="1.5" stroke-dasharray="6"/>
+  <text x="143" y="728" text-anchor="middle" font-size="14" font-weight="bold" fill="#e65100">Scenario Library</text>
+  <text x="143" y="744" text-anchor="middle" font-size="9" fill="#bf360c">examples/*.json</text>
+
+  <rect x="35" y="755" width="100" height="24" rx="4" fill="#f5f5f5" stroke="#bbb" stroke-width="0.8"/>
+  <text x="85" y="771" text-anchor="middle" font-size="8" fill="#999">meridian_v0</text>
+  <rect x="145" y="755" width="100" height="24" rx="4" fill="#f5f5f5" stroke="#bbb" stroke-width="0.8"/>
+  <text x="195" y="771" text-anchor="middle" font-size="8" fill="#999">crucible_v0</text>
+
+  <rect x="35" y="790" width="100" height="28" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.2"/>
+  <text x="85" y="803" text-anchor="middle" font-size="8" font-weight="bold" fill="#2e7d32">slow_burn_v0</text>
+  <text x="85" y="814" text-anchor="middle" font-size="7" fill="#2e7d32">40c, 2 sw</text>
+  <rect x="145" y="790" width="100" height="28" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.2"/>
+  <text x="195" y="803" text-anchor="middle" font-size="8" font-weight="bold" fill="#2e7d32">legal_trap_v0</text>
+  <text x="195" y="814" text-anchor="middle" font-size="7" fill="#2e7d32">56c, 8 sw</text>
+
+  <rect x="35" y="828" width="100" height="28" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.2"/>
+  <text x="85" y="841" text-anchor="middle" font-size="8" font-weight="bold" fill="#2e7d32">resource_collapse</text>
+  <text x="85" y="852" text-anchor="middle" font-size="7" fill="#2e7d32">52c, 16 sw</text>
+  <rect x="145" y="828" width="100" height="28" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.2"/>
+  <text x="195" y="841" text-anchor="middle" font-size="8" font-weight="bold" fill="#2e7d32">ambiguity_storm</text>
+  <text x="195" y="852" text-anchor="middle" font-size="7" fill="#2e7d32">48c, 1 sw</text>
+
+  <text x="143" y="895" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">comprehensive test suite</text>
+
+  <!-- ======================================================== -->
+  <!-- CSV EXPORT PIPELINE — Center -->
+  <!-- ======================================================== -->
+  <rect x="285" y="705" width="365" height="210" rx="10" fill="#e3f2fd" fill-opacity="0.2" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6"/>
+  <text x="468" y="728" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">CSV Export Pipeline (new)</text>
+
+  <!-- CLI -->
+  <rect x="300" y="745" width="155" height="50" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="378" y="765" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565c0">CLI (__main__.py)</text>
+  <text x="378" y="782" text-anchor="middle" font-size="8" fill="#1976d2">run | export subcommands</text>
+
+  <!-- export.py -->
+  <rect x="480" y="745" width="155" height="50" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="558" y="765" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565c0">export.py (new)</text>
+  <text x="558" y="782" text-anchor="middle" font-size="8" fill="#1976d2">structured export</text>
+
+  <line x1="457" y1="770" x2="478" y2="770" stroke="#1565c0" stroke-width="1.5" marker-end="url(#arrow-new)"/>
+
+  <!-- CSV outputs -->
+  <rect x="300" y="810" width="335" height="55" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+  <text x="468" y="828" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">CSV Outputs (stdlib only)</text>
+  <text x="315" y="845" font-size="8" fill="#2e7d32">regime, stressor, bypass, and regret data (flat-file)</text>
+  <text x="315" y="858" font-size="8" fill="#2e7d32">+ summary.json (existing)</text>
+
+  <line x1="558" y1="797" x2="558" y2="808" stroke="#2e7d32" stroke-width="1" marker-end="url(#arrow-green)"/>
+
+  <!-- Arrow from trace output down to export -->
+  <path d="M808,627 L808,660 L468,660 L468,705" fill="none" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="5" marker-end="url(#arrow-new)"/>
+  <text x="638" y="655" text-anchor="middle" font-size="8" fill="#1565c0">trace.jsonl feeds export</text>
+
+  <!-- ======================================================== -->
+  <!-- FIGURE RENDERING — Right -->
+  <!-- ======================================================== -->
+  <rect x="670" y="705" width="510" height="210" rx="10" fill="#f3e5f5" fill-opacity="0.2" stroke="#6a1b9a" stroke-width="1.5" stroke-dasharray="6"/>
+  <text x="925" y="728" text-anchor="middle" font-size="14" font-weight="bold" fill="#6a1b9a">maelstrom_figures/ (separate repo)</text>
+  <text x="925" y="744" text-anchor="middle" font-size="9" fill="#9c27b0">matplotlib only | colorblind-safe Wong palette via colors.json</text>
+
+  <!-- figure_data.py -->
+  <rect x="685" y="755" width="130" height="45" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="750" y="773" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565c0">figure_data.py</text>
+  <text x="750" y="788" text-anchor="middle" font-size="7" fill="#1976d2">tools/ (runtime repo)</text>
+
+  <!-- render.py -->
+  <rect x="838" y="755" width="120" height="45" rx="6" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="898" y="773" text-anchor="middle" font-size="9" font-weight="bold" fill="#6a1b9a">render.py</text>
+  <text x="898" y="788" text-anchor="middle" font-size="7" fill="#9c27b0">CLI --latex --compare</text>
+
+  <!-- colors.json -->
+  <rect x="978" y="755" width="100" height="45" rx="6" fill="#fff8e1" stroke="#f9a825" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="1028" y="773" text-anchor="middle" font-size="9" font-weight="bold" fill="#f57f17">colors.json</text>
+  <text x="1028" y="788" text-anchor="middle" font-size="7" fill="#f9a825">Wong palette</text>
+
+  <!-- palette.py -->
+  <rect x="1098" y="755" width="72" height="45" rx="6" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="0.8"/>
+  <text x="1134" y="773" text-anchor="middle" font-size="8" font-weight="bold" fill="#6a1b9a">palette.py</text>
+  <text x="1134" y="786" text-anchor="middle" font-size="7" fill="#9c27b0">loader</text>
+
+  <!-- Arrows -->
+  <line x1="817" y1="777" x2="836" y2="777" stroke="#6a1b9a" stroke-width="1" marker-end="url(#arrow-fig)"/>
+  <line x1="1078" y1="777" x2="1096" y2="777" stroke="#f9a825" stroke-width="1" marker-end="url(#arrow-orange)"/>
+
+  <!-- 5 renderers row -->
+  <rect x="685" y="815" width="85" height="22" rx="3" fill="#e1bee7" stroke="#8e24aa" stroke-width="0.8"/>
+  <text x="728" y="830" text-anchor="middle" font-size="7" font-weight="bold" fill="#6a1b9a">regime_timeline</text>
+  <rect x="778" y="815" width="85" height="22" rx="3" fill="#e1bee7" stroke="#8e24aa" stroke-width="0.8"/>
+  <text x="821" y="830" text-anchor="middle" font-size="7" font-weight="bold" fill="#6a1b9a">stressor_curves</text>
+  <rect x="871" y="815" width="85" height="22" rx="3" fill="#e1bee7" stroke="#8e24aa" stroke-width="0.8"/>
+  <text x="914" y="830" text-anchor="middle" font-size="7" font-weight="bold" fill="#6a1b9a">bypass_scatter</text>
+  <rect x="964" y="815" width="75" height="22" rx="3" fill="#e1bee7" stroke="#8e24aa" stroke-width="0.8"/>
+  <text x="1002" y="830" text-anchor="middle" font-size="7" font-weight="bold" fill="#6a1b9a">regret_curve</text>
+  <rect x="1047" y="815" width="95" height="22" rx="3" fill="#e1bee7" stroke="#8e24aa" stroke-width="0.8"/>
+  <text x="1095" y="830" text-anchor="middle" font-size="7" font-weight="bold" fill="#6a1b9a">comparison_table</text>
+
+  <!-- Output -->
+  <rect x="685" y="850" width="210" height="50" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+  <text x="790" y="868" text-anchor="middle" font-size="9" font-weight="bold" fill="#2e7d32">24 SVGs (4 per scenario)</text>
+  <text x="790" y="882" text-anchor="middle" font-size="8" fill="#2e7d32">timeline, stressors, bypass, regret</text>
+
+  <rect x="915" y="850" width="255" height="50" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+  <text x="1043" y="868" text-anchor="middle" font-size="9" font-weight="bold" fill="#2e7d32">LaTeX (24 snippets + 1 table)</text>
+  <text x="1043" y="882" text-anchor="middle" font-size="8" fill="#2e7d32">\begin{figure} wrappers + scenario_comparison.tex</text>
+
+  <!-- Arrow: CSVs → figure_data -->
+  <path d="M635,838 L660,838 L660,777 L683,777" fill="none" stroke="#1565c0" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-new)"/>
+
+  <!-- ======================================================== -->
+  <!-- FULL PIPELINE — Bottom -->
+  <!-- ======================================================== -->
+  <rect x="20" y="930" width="1160" height="90" rx="10" fill="#fafafa" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="600" y="952" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">End-to-End Pipeline</text>
+
+  <rect x="45" y="965" width="155" height="40" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1"/>
+  <text x="123" y="982" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565c0">Spec JSON</text>
+  <text x="123" y="996" text-anchor="middle" font-size="8" fill="#1976d2">examples/*.json</text>
+
+  <rect x="230" y="965" width="155" height="40" rx="5" fill="#fff8e1" stroke="#e6a800" stroke-width="1"/>
+  <text x="308" y="982" text-anchor="middle" font-size="9" font-weight="bold" fill="#b38600">Runtime Engine</text>
+  <text x="308" y="996" text-anchor="middle" font-size="8" fill="#997a00">trace + summary</text>
+
+  <rect x="415" y="965" width="155" height="40" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1"/>
+  <text x="493" y="982" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565c0">CSV Export</text>
+  <text x="493" y="996" text-anchor="middle" font-size="8" fill="#1976d2">export.py (stdlib)</text>
+
+  <rect x="600" y="965" width="155" height="40" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
+  <text x="678" y="982" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Figure Data</text>
+  <text x="678" y="996" text-anchor="middle" font-size="8" fill="#bf360c">figure_data.py</text>
+
+  <rect x="785" y="965" width="155" height="40" rx="5" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1"/>
+  <text x="863" y="982" text-anchor="middle" font-size="9" font-weight="bold" fill="#6a1b9a">Render</text>
+  <text x="863" y="996" text-anchor="middle" font-size="8" fill="#9c27b0">render.py (matplotlib)</text>
+
+  <rect x="970" y="965" width="190" height="40" rx="5" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+  <text x="1065" y="982" text-anchor="middle" font-size="9" font-weight="bold" fill="#2e7d32">Paper Figures</text>
+  <text x="1065" y="996" text-anchor="middle" font-size="8" fill="#2e7d32">SVG + LaTeX</text>
+
+  <line x1="202" y1="985" x2="228" y2="985" stroke="#555" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <line x1="387" y1="985" x2="413" y2="985" stroke="#555" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <line x1="572" y1="985" x2="598" y2="985" stroke="#555" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <line x1="757" y1="985" x2="783" y2="985" stroke="#555" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <line x1="942" y1="985" x2="968" y2="985" stroke="#555" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+
+  <!-- ======================================================== -->
+  <!-- LEGEND (Right) -->
+  <!-- ======================================================== -->
+  <rect x="1090" y="75" width="100" height="210" rx="6" fill="white" stroke="#ccc" stroke-width="0.8"/>
+  <text x="1140" y="94" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Legend</text>
+
+  <line x1="1100" y1="108" x2="1130" y2="108" stroke="#4a7ab5" stroke-width="2"/>
+  <text x="1135" y="112" font-size="8" fill="#4a7ab5">Canonical</text>
+
+  <line x1="1100" y1="126" x2="1130" y2="126" stroke="#cc3333" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="1135" y="130" font-size="8" fill="#cc3333">Impulse</text>
+
+  <line x1="1100" y1="144" x2="1130" y2="144" stroke="#8855aa" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="1135" y="148" font-size="8" fill="#8855aa">Rumination</text>
+
+  <line x1="1100" y1="162" x2="1130" y2="162" stroke="#cc8800" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="1135" y="166" font-size="8" fill="#cc8800">Mania</text>
+
+  <line x1="1100" y1="180" x2="1130" y2="180" stroke="#55883b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="1135" y="184" font-size="8" fill="#55883b">Guilt</text>
+
+  <line x1="1100" y1="198" x2="1130" y2="198" stroke="#008899" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="1135" y="202" font-size="8" fill="#008899">Over-learn</text>
+
+  <line x1="1100" y1="216" x2="1130" y2="216" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+  <text x="1135" y="220" font-size="8" fill="#999">Data flow</text>
+
+  <line x1="1100" y1="238" x2="1130" y2="238" stroke="#1565c0" stroke-width="2"/>
+  <text x="1135" y="242" font-size="8" fill="#1565c0">Extended</text>
+
+  <line x1="1100" y1="256" x2="1130" y2="256" stroke="#6a1b9a" stroke-width="2"/>
+  <text x="1135" y="260" font-size="8" fill="#6a1b9a">Figures</text>
+
+  <line x1="1100" y1="274" x2="1130" y2="274" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1135" y="278" font-size="8" fill="#2e7d32">Output</text>
+
+  <!-- Version stamp -->
+  <text x="600" y="1045" text-anchor="middle" font-size="10" fill="#aaa">Maelstrom Runtime — Reference Architecture</text>
+
+  <!-- ======================================================== -->
+  <!-- SCENARIOS BADGE (update from original) -->
+  <!-- ======================================================== -->
+  <rect x="20" y="1060" width="1160" height="75" rx="8" fill="white" stroke="#ddd" stroke-width="1"/>
+  <text x="600" y="1080" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Scenario Summary</text>
+  <text x="65" y="1100" font-size="9" fill="#555">Meridian: 48c, 4sw, stable</text>
+  <text x="265" y="1100" font-size="9" fill="#555">Crucible: 64c, 13sw, stress harness</text>
+  <text x="490" y="1100" font-size="9" fill="#555">Slow Burn: 40c, 2sw, drift</text>
+  <text x="680" y="1100" font-size="9" fill="#555">Legal Trap: 56c, 8sw, capture+escape</text>
+  <text x="900" y="1100" font-size="9" fill="#555">Resource Collapse: 52c, 16sw, crisis</text>
+  <text x="65" y="1120" font-size="9" fill="#555">Ambiguity Storm: 48c, 1sw, lock-in</text>
+  <text x="490" y="1120" font-size="9" fill="#888">All 5 bypasses + 2 vetoes active across scenarios</text>
+
+</svg>
