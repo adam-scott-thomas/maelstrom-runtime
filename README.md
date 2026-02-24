@@ -121,4 +121,4 @@ python scripts/recompute_merkle.py
 
 ## License
 
-[MIT](LICENSE)
+Proprietary — see [LICENSE](LICENSE)
