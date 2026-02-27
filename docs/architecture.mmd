@@ -1,0 +1,193 @@
+---
+title: Maelstrom Runtime v2.2.0 — Architecture (AST-extracted)
+---
+flowchart TB
+
+    %% ── Styles ──
+    classDef runtime fill:#0c1425,stroke:#60a5fa,color:#bfdbfe,stroke-width:3px
+    classDef modstyle fill:#1e293b,stroke:#3b82f6,color:#e2e8f0,stroke-width:2px
+    classDef stepstyle fill:#0f172a,stroke:#f59e0b,color:#fde68a,stroke-width:2px
+    classDef statestyle fill:#1e3a5f,stroke:#38bdf8,color:#bae6fd,stroke-width:2px
+    classDef typestyle fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px
+    classDef toolstyle fill:#1e1b2e,stroke:#a78bfa,color:#ddd6fe,stroke-width:2px
+    classDef extbound fill:#1c1917,stroke:#a8a29e,color:#e7e5e4,stroke-width:1px,stroke-dasharray:5 5
+
+    %% ══════════════════════════════════════════════
+    %% EXTERNAL BOUNDARY
+    %% ══════════════════════════════════════════════
+    EXT_SPEC(("MaelstromSpec<br/>(from JSON)"))
+    EXT_SUMMARY(("summary dict<br/>+ cycle_results"))
+
+    %% ══════════════════════════════════════════════
+    %% RUNTIME — sole orchestrator
+    %% ══════════════════════════════════════════════
+    RT["<b>MaelstromRuntime</b><br/><i>Deterministic simulation runtime</i><br/><i>run() → _execute_cycle(t) for each cycle</i><br/><i>Owns: spec, rng, constraint_state,</i><br/><i>penalty_history, prev_regime, doctrine</i>"]
+
+    EXT_SPEC --> RT
+    RT --> EXT_SUMMARY
+
+    %% ══════════════════════════════════════════════
+    %% TYPE CONTRACTS (types.py)
+    %% ══════════════════════════════════════════════
+    subgraph TYPES["types.py — 9 dataclasses + constants"]
+        direction LR
+        T_TRANS["TransitionSpec<br/><i>source, target, A, W, alpha, beta</i>"]
+        T_DEFORMED["DeformedTransition<br/><i>A_prime, W_prime, admissible</i>"]
+        T_REGIME["RegimeSpec<br/><i>name, w[], u[]</i>"]
+        T_CSTATE["ConstraintState<br/><i>NamedTuple — 6 floats</i><br/><i>governance_disallow, identity_veto,</i><br/><i>coalition_veto, coalition_drag,</i><br/><i>bypass_count, regime_age</i>"]
+        T_OVERLAY["OverlaySpec · VetoEvent"]
+        T_BYPASS["BypassSpec · BypassEvent"]
+        T_SPEC["MaelstromSpec<br/><i>from_json() — full scenario</i>"]
+    end
+
+    %% ══════════════════════════════════════════════
+    %% UTILITY MODULES (utils.py)
+    %% ══════════════════════════════════════════════
+    subgraph UTILS["utils.py — deterministic primitives"]
+        direction LR
+        U_RNG["DeterministicRNG<br/><i>seeded, draw-counted</i>"]
+        U_ARGMAX["deterministic_argmax()<br/><i>tiebreak by priority</i>"]
+        U_HASH["hash_state()<br/><i>SHA-256 canonical JSON</i>"]
+        U_CLAMP["clamp()"]
+    end
+
+    %% ══════════════════════════════════════════════
+    %% SOURCE MODULES
+    %% ══════════════════════════════════════════════
+    subgraph MODULES["maelstrom.* — functional modules"]
+        direction TB
+
+        MOD_STRESSORS["stressors.py<br/><i>interpolate_keyframes()</i><br/><i>compute_stressor_vector()</i><br/><i>stressor_dict()</i>"]
+
+        MOD_LEGALITY["legality.py<br/><i>deform_transition()</i><br/><i>deform_all()</i><br/><i>legality_summary()</i><br/><i>canonical_path_admissible()</i><br/><i>canonical_path_penalty()</i>"]
+
+        MOD_REGIMES["regimes.py<br/><i>compute_penalty() — P_r(t) = w·S + u·C</i><br/><i>compute_all_penalties()</i><br/><i>compute_gradients() — dP_r/dt</i><br/><i>select_active_regime() — argmax + inertia</i><br/><i>update_constraint_state() — C(t+1)</i>"]
+
+        MOD_BYPASSES["bypasses.py<br/><i>check_bypass_eligibility()</i><br/><i>select_bypass()</i><br/><i>determine_execution_path()</i><br/><i>BypassEligibility dataclass</i>"]
+
+        MOD_OVERLAYS["overlays.py<br/><i>apply_overlays()</i><br/><i>identity + coalition veto gates</i>"]
+
+        MOD_DOCTRINE["doctrine.py<br/><i>DoctrineState — accumulates across run</i><br/><i>archive_proposals()</i><br/><i>compute_regret()</i><br/><i>regret_summary()</i><br/><i>CounterfactualEntry, DoctrineCandidate,</i><br/><i>DoctrineRecord</i>"]
+    end
+
+    %% ══════════════════════════════════════════════
+    %% 7-STEP CYCLE LOOP
+    %% All calls go through MaelstromRuntime._execute_cycle(t)
+    %% No module calls another module directly.
+    %% ══════════════════════════════════════════════
+    subgraph CYCLE["_execute_cycle(t) — 7 deterministic steps"]
+        direction TB
+
+        S1["Step 1: Update S(t)<br/><i>stressor vector from schedule</i>"]
+        S2["Step 2: Deform legality graph<br/><i>A'_ij = A - α·S(t)</i><br/><i>W'_ij = W + β·S(t)</i>"]
+        S3["Step 3: Compute P_r(t) + gradients<br/><i>P_r = w_r·S + u_r·C</i><br/><i>dP_r/dt over window</i>"]
+        S4["Step 4: Select active regime<br/><i>r* = argmax dP_r/dt</i><br/><i>with asymmetric inertia</i>"]
+        S5["Step 5: Bypass eligibility<br/><i>regime match + intensity > budget</i><br/><i>+ transition admissible</i>"]
+        S6["Step 6: Execution path<br/><i>canonical 5-phase or collapsed</i>"]
+        S7["Step 7: Governance check<br/><i>canonical_path_admissible()</i><br/><i>→ update C(t+1)</i>"]
+
+        S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
+    end
+
+    %% ══════════════════════════════════════════════
+    %% RUNTIME ↔ MODULE CONNECTIONS
+    %% Runtime is the sole caller. Modules are pure functions.
+    %% ══════════════════════════════════════════════
+
+    %% Runtime calls into each module
+    RT -->|"compute_stressor_vector(spec, t)<br/>stressor_dict(spec, vec)"| MOD_STRESSORS
+    RT -->|"deform_all(spec, S)<br/>legality_summary(deformed)<br/>canonical_path_admissible(deformed)"| MOD_LEGALITY
+    RT -->|"compute_all_penalties(spec, S, C)<br/>compute_gradients(P, history)<br/>select_active_regime(grads)<br/>update_constraint_state(prev, ...)"| MOD_REGIMES
+    RT -->|"check_bypass_eligibility(bypasses, regime, S, deformed)<br/>select_bypass(eligibilities)<br/>determine_execution_path(bypasses, selected)"| MOD_BYPASSES
+    RT -->|"apply_overlays()<br/>(structural gate — proposals not<br/>generated in reference edition)"| MOD_OVERLAYS
+    RT -->|"DoctrineState owned by runtime<br/>compute_regret(), regret_summary()"| MOD_DOCTRINE
+
+    %% Modules return values back to runtime
+    MOD_STRESSORS -->|"list[float], dict"| RT
+    MOD_LEGALITY -->|"dict[str, DeformedTransition]"| RT
+    MOD_REGIMES -->|"penalties, gradients, regime, C(t+1)"| RT
+    MOD_BYPASSES -->|"eligibilities, BypassEvent?, path"| RT
+    MOD_DOCTRINE -->|"regret: float, summary: dict"| RT
+
+    %% Runtime owns the cycle loop
+    RT -->|"for t in 1..total_cycles"| CYCLE
+
+    %% ══════════════════════════════════════════════
+    %% CYCLE STATE (carried across cycles)
+    %% ══════════════════════════════════════════════
+    subgraph STATE["Cycle-to-Cycle State (owned by runtime)"]
+        direction LR
+        ST_C["constraint_state<br/><i>C(t) — ConstraintState</i>"]
+        ST_PH["penalty_history<br/><i>list[dict[str, float]]</i>"]
+        ST_PR["prev_regime<br/><i>str | None</i>"]
+        ST_DOC["doctrine<br/><i>DoctrineState</i>"]
+        ST_RNG["rng<br/><i>DeterministicRNG</i>"]
+        ST_RES["cycle_results<br/><i>list[dict]</i>"]
+    end
+
+    RT ---|"reads + writes<br/>between cycles"| STATE
+
+    %% ══════════════════════════════════════════════
+    %% CANONICAL PHASES
+    %% ══════════════════════════════════════════════
+    subgraph PHASES["Canonical 5-Phase Deliberation Loop"]
+        direction LR
+        P_EVAL["evaluate"]
+        P_GEN["generate"]
+        P_SEL["select"]
+        P_EXEC["execute"]
+        P_REFL["reflect"]
+        P_EVAL --> P_GEN --> P_SEL --> P_EXEC --> P_REFL --> P_EVAL
+    end
+
+    %% ══════════════════════════════════════════════
+    %% BYPASS COLLAPSE PATHS
+    %% ══════════════════════════════════════════════
+    subgraph BYPASSES_DEF["Named Bypass Paths (collapse phases)"]
+        direction TB
+        BP_IMP["Impulse<br/><i>evaluate → execute</i><br/><i>survival regime</i>"]
+        BP_RUM["Rumination<br/><i>evaluate → reflect</i><br/><i>epistemic regime</i>"]
+        BP_MAN["Mania<br/><i>generate → execute</i><br/><i>economic regime</i>"]
+        BP_GUI["Guilt<br/><i>select → reflect</i><br/><i>moral, legal regime</i>"]
+        BP_OVL["Over-learning<br/><i>reflect → generate</i><br/><i>epistemic, economic</i>"]
+    end
+
+    MOD_BYPASSES -.-> BYPASSES_DEF
+    BYPASSES_DEF -.->|"replaces canonical path<br/>when activated"| PHASES
+
+    %% ══════════════════════════════════════════════
+    %% SCRIPTS & EXAMPLES
+    %% ══════════════════════════════════════════════
+    subgraph TOOLS["scripts/ & examples/"]
+        direction LR
+        TOOL_DEMO["demo_runner.py<br/><i>run scenario from JSON</i>"]
+        TOOL_TRACE["export_demo_trace.py<br/><i>export cycle results</i>"]
+        TOOL_MERKLE["recompute_merkle.py<br/><i>integrity hash tree</i>"]
+    end
+
+    EXT_SPEC -.-> TOOL_DEMO
+    EXT_SPEC -.-> TOOL_TRACE
+    TOOL_DEMO -.->|"MaelstromRuntime"| RT
+    TOOL_TRACE -.->|"MaelstromRuntime"| RT
+
+    %% ══════════════════════════════════════════════
+    %% LEGEND
+    %% ══════════════════════════════════════════════
+    subgraph LEGEND["Legend"]
+        direction LR
+        L1["──── data flow / ownership"]
+        L2["- - - optional / structural reference"]
+        L3["Modules are pure functions.<br/>Runtime is the sole caller.<br/>No module imports another<br/>module's functions directly."]
+    end
+
+    %% ── Apply styles ──
+    class RT runtime
+    class MOD_STRESSORS,MOD_LEGALITY,MOD_REGIMES,MOD_BYPASSES,MOD_OVERLAYS,MOD_DOCTRINE modstyle
+    class S1,S2,S3,S4,S5,S6,S7 stepstyle
+    class ST_C,ST_PH,ST_PR,ST_DOC,ST_RNG,ST_RES statestyle
+    class T_TRANS,T_DEFORMED,T_REGIME,T_CSTATE,T_OVERLAY,T_BYPASS,T_SPEC typestyle
+    class U_RNG,U_ARGMAX,U_HASH,U_CLAMP modstyle
+    class P_EVAL,P_GEN,P_SEL,P_EXEC,P_REFL stepstyle
+    class BP_IMP,BP_RUM,BP_MAN,BP_GUI,BP_OVL modstyle
+    class TOOL_DEMO,TOOL_TRACE,TOOL_MERKLE toolstyle
+    class EXT_SPEC,EXT_SUMMARY extbound

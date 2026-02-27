@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e17"/>
+      <stop offset="50%" style="stop-color:#0f1724"/>
+      <stop offset="100%" style="stop-color:#0a0e17"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff3b3b"/>
+      <stop offset="100%" style="stop-color:#ff6b35"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2a6fff"/>
+      <stop offset="100%" style="stop-color:#00c8ff"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff88"/>
+      <stop offset="100%" style="stop-color:#00cc66"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glowStrong">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a2440" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bgGrad)"/>
+  <rect width="1280" height="640" fill="url(#grid)" opacity="0.4"/>
+
+  <!-- Subtle radial glow behind cycle -->
+  <ellipse cx="780" cy="320" rx="320" ry="250" fill="#1a2d5a" opacity="0.12"/>
+
+  <!-- Connection lines between cycle nodes (drawn first, behind nodes) -->
+  <!-- EVALUATE → GENERATE -->
+  <line x1="710" y1="148" x2="620" y2="232" stroke="#2a6fff" stroke-width="1.5" opacity="0.5"/>
+  <!-- GENERATE → SELECT -->
+  <line x1="620" y1="282" x2="640" y2="368" stroke="#2a6fff" stroke-width="1.5" opacity="0.5"/>
+  <!-- SELECT → EXECUTE -->
+  <line x1="700" y1="408" x2="820" y2="432" stroke="#2a6fff" stroke-width="1.5" opacity="0.5"/>
+  <!-- EXECUTE → REFLECT -->
+  <line x1="890" y1="408" x2="920" y2="318" stroke="#2a6fff" stroke-width="1.5" opacity="0.5"/>
+  <!-- REFLECT → EVALUATE (loop) -->
+  <line x1="920" y1="268" x2="840" y2="148" stroke="#ff3b3b" stroke-width="1.5" opacity="0.4" stroke-dasharray="6,4"/>
+
+  <!-- 5-Phase Cycle Nodes -->
+  <!-- EVALUATE -->
+  <g filter="url(#glow)">
+    <rect x="700" y="108" width="130" height="40" rx="6" fill="#0f1724" stroke="#2a6fff" stroke-width="1.5"/>
+    <text x="765" y="133" font-family="monospace" font-size="13" fill="#00c8ff" text-anchor="middle" font-weight="bold">EVALUATE</text>
+  </g>
+
+  <!-- GENERATE -->
+  <g filter="url(#glow)">
+    <rect x="560" y="232" width="130" height="40" rx="6" fill="#0f1724" stroke="#2a6fff" stroke-width="1.5"/>
+    <text x="625" y="257" font-family="monospace" font-size="13" fill="#00c8ff" text-anchor="middle" font-weight="bold">GENERATE</text>
+  </g>
+
+  <!-- SELECT -->
+  <g filter="url(#glow)">
+    <rect x="590" y="368" width="130" height="40" rx="6" fill="#0f1724" stroke="#ff3b3b" stroke-width="1.5"/>
+    <text x="655" y="393" font-family="monospace" font-size="13" fill="#ff6b35" text-anchor="middle" font-weight="bold">SELECT</text>
+  </g>
+
+  <!-- EXECUTE -->
+  <g filter="url(#glow)">
+    <rect x="800" y="388" width="130" height="40" rx="6" fill="#0f1724" stroke="#2a6fff" stroke-width="1.5"/>
+    <text x="865" y="413" font-family="monospace" font-size="13" fill="#00c8ff" text-anchor="middle" font-weight="bold">EXECUTE</text>
+  </g>
+
+  <!-- REFLECT -->
+  <g filter="url(#glow)">
+    <rect x="870" y="258" width="130" height="40" rx="6" fill="#0f1724" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="935" y="283" font-family="monospace" font-size="13" fill="#00ff88" text-anchor="middle" font-weight="bold">REFLECT</text>
+  </g>
+
+  <!-- Regime labels floating around cycle -->
+  <text x="530" y="170" font-family="monospace" font-size="10" fill="#ff3b3b" opacity="0.6">SURVIVAL</text>
+  <text x="490" y="330" font-family="monospace" font-size="10" fill="#ffaa00" opacity="0.6">ECONOMIC</text>
+  <text x="520" y="450" font-family="monospace" font-size="10" fill="#00ff88" opacity="0.6">MORAL</text>
+  <text x="960" y="170" font-family="monospace" font-size="10" fill="#00c8ff" opacity="0.6">EPISTEMIC</text>
+  <text x="980" y="360" font-family="monospace" font-size="10" fill="#bb88ff" opacity="0.6">LEGAL</text>
+  <text x="760" y="480" font-family="monospace" font-size="10" fill="#556688" opacity="0.5">PEACETIME</text>
+
+  <!-- Small data traces / sparklines for texture -->
+  <polyline points="540,500 548,495 556,498 564,488 572,492 580,480 588,485 596,475 604,478 612,470 620,474 628,462 636,466 644,455 652,460"
+            fill="none" stroke="#ff3b3b" stroke-width="1" opacity="0.3"/>
+  <text x="540" y="518" font-family="monospace" font-size="8" fill="#ff3b3b" opacity="0.3">S(t) ↑</text>
+
+  <polyline points="900,480 908,484 916,478 924,482 932,476 940,480 948,470 956,474 964,465 972,468 980,458 988,462 996,452 1004,456"
+            fill="none" stroke="#2a6fff" stroke-width="1" opacity="0.3"/>
+  <text x="900" y="498" font-family="monospace" font-size="8" fill="#2a6fff" opacity="0.3">m(t)</text>
+
+  <!-- Left side: Title block -->
+  <text x="60" y="195" font-family="monospace" font-size="14" fill="#556688" letter-spacing="6">DETERMINISTIC COGNITIVE ARCHITECTURE</text>
+
+  <text x="60" y="260" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="56" fill="#ffffff" font-weight="bold" letter-spacing="-1">MAELSTROM</text>
+  <text x="60" y="310" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="36" fill="#556688" font-weight="300">RUNTIME</text>
+
+  <!-- Accent line -->
+  <rect x="60" y="330" width="120" height="3" rx="1.5" fill="url(#accentGrad)"/>
+
+  <!-- Tagline -->
+  <text x="60" y="370" font-family="monospace" font-size="14" fill="#8899aa">Volitional decision-making</text>
+  <text x="60" y="390" font-family="monospace" font-size="14" fill="#8899aa">under stress &amp; constraint</text>
+
+  <!-- Stats row -->
+  <text x="60" y="440" font-family="monospace" font-size="11" fill="#00ff88" filter="url(#glow)">■</text>
+  <text x="78" y="440" font-family="monospace" font-size="11" fill="#556688">3M+ ticks verified</text>
+  <text x="60" y="460" font-family="monospace" font-size="11" fill="#00ff88" filter="url(#glow)">■</text>
+  <text x="78" y="460" font-family="monospace" font-size="11" fill="#556688">Bit-perfect determinism</text>
+  <text x="60" y="480" font-family="monospace" font-size="11" fill="#00ff88" filter="url(#glow)">■</text>
+  <text x="78" y="480" font-family="monospace" font-size="11" fill="#556688">Zero dependencies</text>
+  <text x="60" y="500" font-family="monospace" font-size="11" fill="#00ff88" filter="url(#glow)">■</text>
+  <text x="78" y="500" font-family="monospace" font-size="11" fill="#556688">Merkle-verified traces</text>
+
+  <!-- Version badge -->
+  <rect x="60" y="530" width="60" height="22" rx="4" fill="#1a2440" stroke="#2a6fff" stroke-width="1"/>
+  <text x="90" y="545" font-family="monospace" font-size="10" fill="#2a6fff" text-anchor="middle">v2.2.0</text>
+  <rect x="128" y="530" width="90" height="22" rx="4" fill="#1a2440" stroke="#556688" stroke-width="1"/>
+  <text x="173" y="545" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">Python 3.12+</text>
+
+  <!-- Top/bottom border accents -->
+  <rect x="0" y="0" width="1280" height="2" fill="url(#accentGrad)" opacity="0.6"/>
+  <rect x="0" y="638" width="1280" height="2" fill="url(#accentGrad)" opacity="0.3"/>
+</svg>

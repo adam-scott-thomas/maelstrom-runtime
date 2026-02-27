@@ -31,45 +31,45 @@
   <text x="600" y="55" text-anchor="middle" font-size="12" fill="#777">Trigger detection, feedback engine, doctrine store, promotion pipeline</text>
 
   <!-- ======================================================== -->
-  <!-- SECTION 0: v2.1.1 BASELINE (dimmed) -->
+  <!-- SECTION 0: BASELINE (dimmed) -->
   <!-- ======================================================== -->
   <rect x="20" y="75" width="1160" height="85" rx="10" fill="#f5f5f5" fill-opacity="0.5" stroke="#bbb" stroke-width="1.5" stroke-dasharray="6"/>
   <text x="40" y="97" font-size="13" font-weight="bold" fill="#999">Runtime Baseline (locked)</text>
 
   <rect x="40" y="108" width="160" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
   <text x="120" y="123" text-anchor="middle" font-size="9" fill="#999">Runtime Engine</text>
-  <text x="120" y="137" text-anchor="middle" font-size="7" fill="#bbb">5-phase, 6 regimes, 5 bypasses</text>
+  <text x="120" y="137" text-anchor="middle" font-size="7" fill="#bbb">core execution loop</text>
 
   <rect x="215" y="108" width="130" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
-  <text x="280" y="123" text-anchor="middle" font-size="9" fill="#999">28 Scenarios</text>
-  <text x="280" y="137" text-anchor="middle" font-size="7" fill="#bbb">examples/*_v0.json</text>
+  <text x="280" y="123" text-anchor="middle" font-size="9" fill="#999">Scenarios</text>
+  <text x="280" y="137" text-anchor="middle" font-size="7" fill="#bbb">scenario specifications</text>
 
   <rect x="360" y="108" width="130" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
   <text x="425" y="123" text-anchor="middle" font-size="9" fill="#999">Doctrine Engine</text>
   <text x="425" y="137" text-anchor="middle" font-size="7" fill="#bbb">regret + counterfactuals</text>
 
   <rect x="505" y="108" width="90" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
-  <text x="550" y="130" text-anchor="middle" font-size="9" fill="#999">trace.jsonl</text>
+  <text x="550" y="130" text-anchor="middle" font-size="9" fill="#999">Cycle Log</text>
 
   <rect x="608" y="108" width="100" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
-  <text x="658" y="130" text-anchor="middle" font-size="9" fill="#999">summary.json</text>
+  <text x="658" y="130" text-anchor="middle" font-size="9" fill="#999">Run Summary</text>
 
   <rect x="722" y="108" width="100" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
-  <text x="772" y="130" text-anchor="middle" font-size="9" fill="#999">report.md</text>
+  <text x="772" y="130" text-anchor="middle" font-size="9" fill="#999">Analysis Report</text>
 
   <rect x="836" y="108" width="120" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
-  <text x="896" y="130" text-anchor="middle" font-size="9" fill="#999">trace_human.md</text>
+  <text x="896" y="130" text-anchor="middle" font-size="9" fill="#999">Narrative Output</text>
 
   <rect x="970" y="108" width="100" height="38" rx="5" fill="#f5f5f5" stroke="#ccc" stroke-width="0.8"/>
   <text x="1020" y="123" text-anchor="middle" font-size="9" fill="#999">Test suite</text>
-  <text x="1020" y="137" text-anchor="middle" font-size="7" fill="#bbb">LOCK verified</text>
+  <text x="1020" y="137" text-anchor="middle" font-size="7" fill="#bbb">integrity verified</text>
 
   <!-- ======================================================== -->
-  <!-- SECTION 1: 5 DOCTRINE TRIGGER TYPES (Top Left) -->
+  <!-- SECTION 1: DOCTRINE TRIGGER TYPES (Top Left) -->
   <!-- ======================================================== -->
   <rect x="20" y="180" width="575" height="230" rx="10" fill="#f3e5f5" fill-opacity="0.15" stroke="#6a1b9a" stroke-width="1.5" stroke-dasharray="6"/>
-  <text x="308" y="203" text-anchor="middle" font-size="16" font-weight="bold" fill="#6a1b9a">5 Doctrine Trigger Types (doctrine/__init__.py)</text>
-  <text x="308" y="220" text-anchor="middle" font-size="10" fill="#9c27b0">Detected per-cycle, logged as DoctrineCandidate, mapped to DoctrineRecord for JSONL</text>
+  <text x="308" y="203" text-anchor="middle" font-size="16" font-weight="bold" fill="#6a1b9a">Doctrine Trigger Types</text>
+  <text x="308" y="220" text-anchor="middle" font-size="10" fill="#9c27b0">Detected per-cycle, logged as structured records with provenance</text>
 
   <!-- Trigger types -->
   <rect x="40" y="235" width="165" height="50" rx="6" fill="#e8eaf6" stroke="#283593" stroke-width="1.5" filter="url(#shadow)"/>
@@ -101,48 +101,48 @@
   <text x="483" y="345" text-anchor="middle" font-size="8" fill="#9c27b0">regime history</text>
 
   <!-- ======================================================== -->
-  <!-- SECTION 2: JSONL + FEEDBACK OUTPUTS (Top Right) -->
+  <!-- SECTION 2: OUTPUT FILES (Top Right) -->
   <!-- ======================================================== -->
   <rect x="610" y="180" width="570" height="230" rx="10" fill="#e8f5e9" fill-opacity="0.15" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6"/>
-  <text x="895" y="203" text-anchor="middle" font-size="16" font-weight="bold" fill="#2e7d32">New Output Files (per run)</text>
+  <text x="895" y="203" text-anchor="middle" font-size="16" font-weight="bold" fill="#2e7d32">Output Artifacts (per run)</text>
 
-  <!-- doctrine_candidates.jsonl -->
+  <!-- doctrine candidates log -->
   <rect x="630" y="225" width="250" height="120" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="755" y="247" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">doctrine_candidates.jsonl</text>
-  <text x="755" y="265" text-anchor="middle" font-size="9" fill="#388e3c">1 record per trigger event</text>
-  <text x="645" y="285" font-size="8" fill="#388e3c">cycle, regime, trigger_type</text>
-  <text x="645" y="298" font-size="8" fill="#388e3c">trigger_metrics</text>
-  <text x="645" y="311" font-size="8" fill="#388e3c">proposed_action</text>
-  <text x="645" y="324" font-size="8" fill="#388e3c">deterministic_hash (sha256)</text>
+  <text x="755" y="247" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">Doctrine Candidates Log</text>
+  <text x="755" y="265" text-anchor="middle" font-size="9" fill="#388e3c">one record per trigger event</text>
+  <text x="645" y="285" font-size="8" fill="#388e3c">cycle, regime, trigger type</text>
+  <text x="645" y="298" font-size="8" fill="#388e3c">trigger metrics</text>
+  <text x="645" y="311" font-size="8" fill="#388e3c">proposed action</text>
+  <text x="645" y="324" font-size="8" fill="#388e3c">deterministic integrity hash</text>
 
-  <!-- feedback_deltas.json -->
+  <!-- feedback deltas -->
   <rect x="900" y="225" width="260" height="120" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="1030" y="247" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">feedback_deltas.json</text>
+  <text x="1030" y="247" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">Feedback Adjustments</text>
   <text x="1030" y="265" text-anchor="middle" font-size="9" fill="#bf360c">Bounded parameter adjustments</text>
   <text x="915" y="290" font-size="8" fill="#bf360c">parameter + target</text>
   <text x="915" y="308" font-size="8" fill="#bf360c">bounded delta (clamped)</text>
   <text x="915" y="326" font-size="8" fill="#bf360c">reason</text>
 
-  <!-- Arrow from triggers to JSONL -->
+  <!-- Arrow from triggers to log -->
   <line x1="575" y1="330" x2="628" y2="290" stroke="#6a1b9a" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-purple)"/>
-  <text x="592" y="298" font-size="7" fill="#6a1b9a" transform="rotate(-20, 592, 298)">candidate_to_record()</text>
+  <text x="592" y="298" font-size="7" fill="#6a1b9a" transform="rotate(-20, 592, 298)">structured record</text>
 
-  <!-- Arrow from JSONL to feedback -->
+  <!-- Arrow from log to feedback -->
   <line x1="882" y1="285" x2="898" y2="285" stroke="#e65100" stroke-width="1.5" marker-end="url(#arr-orange)"/>
 
   <!-- Mapping table -->
   <rect x="630" y="360" width="530" height="35" rx="4" fill="#fafafa" stroke="#ccc" stroke-width="1"/>
-  <text x="640" y="378" font-size="8" font-weight="bold" fill="#555">Trigger → Record mapping:</text>
+  <text x="640" y="378" font-size="8" font-weight="bold" fill="#555">Trigger to Record mapping:</text>
   <text x="640" y="390" font-size="7" fill="#888">Each internal candidate type maps to a structured trigger record for deterministic logging</text>
 
   <!-- ======================================================== -->
   <!-- SECTION 3: FEEDBACK RULE ENGINE (Middle) -->
   <!-- ======================================================== -->
   <rect x="20" y="425" width="575" height="195" rx="10" fill="#fff3e0" fill-opacity="0.15" stroke="#e65100" stroke-width="1.5" stroke-dasharray="6"/>
-  <text x="308" y="448" text-anchor="middle" font-size="16" font-weight="bold" fill="#e65100">Feedback Rule Engine (feedback.py)</text>
+  <text x="308" y="448" text-anchor="middle" font-size="16" font-weight="bold" fill="#e65100">Feedback Rule Engine</text>
   <text x="308" y="463" text-anchor="middle" font-size="10" fill="#bf360c">Deterministic rules | all deltas bounded | inter-run only</text>
 
-  <!-- Rule boxes (structural, no thresholds) -->
+  <!-- Rule boxes -->
   <rect x="35" y="478" width="170" height="55" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1" filter="url(#shadow)"/>
   <text x="120" y="497" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Regret-based</text>
   <text x="120" y="511" text-anchor="middle" font-size="7" fill="#bf360c">high regret → adjust</text>
@@ -156,7 +156,7 @@
   <rect x="395" y="478" width="185" height="55" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1" filter="url(#shadow)"/>
   <text x="488" y="497" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Governance-based</text>
   <text x="488" y="511" text-anchor="middle" font-size="7" fill="#bf360c">disallow loops →</text>
-  <text x="488" y="523" text-anchor="middle" font-size="7" fill="#bf360c">adjust sensitivity</text>
+  <text x="488" y="523" text-anchor="middle" font-size="7" fill="#bf360c">sensitivity adjustment</text>
 
   <rect x="35" y="545" width="170" height="55" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1" filter="url(#shadow)"/>
   <text x="120" y="564" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Veto-based</text>
@@ -166,7 +166,7 @@
   <rect x="215" y="545" width="170" height="55" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1" filter="url(#shadow)"/>
   <text x="300" y="564" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Confidence-based</text>
   <text x="300" y="578" text-anchor="middle" font-size="7" fill="#bf360c">low-confidence switches →</text>
-  <text x="300" y="590" text-anchor="middle" font-size="7" fill="#bf360c">adjust gradient window</text>
+  <text x="300" y="590" text-anchor="middle" font-size="7" fill="#bf360c">adaptive adjustment</text>
 
   <!-- Key invariant -->
   <rect x="395" y="545" width="185" height="55" rx="6" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
@@ -200,56 +200,56 @@
   <text x="920" y="573" font-size="8" fill="#00695c">Gate: primary improved, no safety regression</text>
   <text x="920" y="588" font-size="8" fill="#00695c">Promote or reject</text>
 
-  <!-- Arrow store → evaluator -->
+  <!-- Arrow store to evaluator -->
   <line x1="882" y1="535" x2="898" y2="535" stroke="#00695c" stroke-width="1.5" marker-end="url(#arr-teal)"/>
 
   <!-- ======================================================== -->
   <!-- SECTION 5: DATA FLOW PIPELINE (Bottom) -->
   <!-- ======================================================== -->
   <rect x="20" y="640" width="1160" height="130" rx="10" fill="#e3f2fd" fill-opacity="0.15" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6"/>
-  <text x="600" y="663" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">Phase 9 Data Flow — Per Run</text>
+  <text x="600" y="663" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">Data Flow — Per Run</text>
 
-  <!-- Step 1: Cycle loop -->
+  <!-- Step 1 -->
   <rect x="40" y="680" width="150" height="55" rx="6" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
   <text x="115" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">Cycle Loop</text>
-  <text x="115" y="714" text-anchor="middle" font-size="7" fill="#888">t = 1..T</text>
+  <text x="115" y="714" text-anchor="middle" font-size="7" fill="#888">iterative execution</text>
   <text x="115" y="726" text-anchor="middle" font-size="7" fill="#888">(unchanged)</text>
 
-  <!-- Step 2: Detect triggers -->
+  <!-- Step 2 -->
   <rect x="215" y="680" width="150" height="55" rx="6" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5"/>
   <text x="290" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#6a1b9a">Detect Triggers</text>
-  <text x="290" y="714" text-anchor="middle" font-size="7" fill="#9c27b0">DoctrineCandidate[]</text>
-  <text x="290" y="726" text-anchor="middle" font-size="7" fill="#9c27b0">→ DoctrineRecord[]</text>
+  <text x="290" y="714" text-anchor="middle" font-size="7" fill="#9c27b0">candidate detection</text>
+  <text x="290" y="726" text-anchor="middle" font-size="7" fill="#9c27b0">structured records</text>
 
-  <!-- Step 3: Write JSONL -->
+  <!-- Step 3 -->
   <rect x="390" y="680" width="150" height="55" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
-  <text x="465" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#2e7d32">Write JSONL</text>
-  <text x="465" y="714" text-anchor="middle" font-size="7" fill="#388e3c">doctrine_candidates</text>
-  <text x="465" y="726" text-anchor="middle" font-size="7" fill="#388e3c">.jsonl</text>
+  <text x="465" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#2e7d32">Write Log</text>
+  <text x="465" y="714" text-anchor="middle" font-size="7" fill="#388e3c">doctrine candidates</text>
+  <text x="465" y="726" text-anchor="middle" font-size="7" fill="#388e3c">append-only</text>
 
-  <!-- Step 4: Write summary -->
+  <!-- Step 4 -->
   <rect x="565" y="680" width="120" height="55" rx="6" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
   <text x="625" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">Summary</text>
-  <text x="625" y="714" text-anchor="middle" font-size="7" fill="#888">summary.json</text>
+  <text x="625" y="714" text-anchor="middle" font-size="7" fill="#888">run summary</text>
   <text x="625" y="726" text-anchor="middle" font-size="7" fill="#888">(unchanged)</text>
 
-  <!-- Step 5: Compute feedback -->
+  <!-- Step 5 -->
   <rect x="710" y="680" width="150" height="55" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
   <text x="785" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Compute Deltas</text>
-  <text x="785" y="714" text-anchor="middle" font-size="7" fill="#bf360c">compute_feedback_deltas()</text>
+  <text x="785" y="714" text-anchor="middle" font-size="7" fill="#bf360c">bounded feedback computation</text>
   <text x="785" y="726" text-anchor="middle" font-size="7" fill="#bf360c">summary + candidates</text>
 
-  <!-- Step 6: Write deltas -->
+  <!-- Step 6 -->
   <rect x="885" y="680" width="135" height="55" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
   <text x="953" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Write Deltas</text>
-  <text x="953" y="714" text-anchor="middle" font-size="7" fill="#bf360c">feedback_deltas</text>
-  <text x="953" y="726" text-anchor="middle" font-size="7" fill="#bf360c">.json</text>
+  <text x="953" y="714" text-anchor="middle" font-size="7" fill="#bf360c">feedback</text>
+  <text x="953" y="726" text-anchor="middle" font-size="7" fill="#bf360c">adjustments</text>
 
-  <!-- Step 7: Evaluate (future) -->
+  <!-- Step 7 -->
   <rect x="1045" y="680" width="120" height="55" rx="6" fill="#e0f2f1" stroke="#00695c" stroke-width="1.5"/>
   <text x="1105" y="700" text-anchor="middle" font-size="9" font-weight="bold" fill="#00695c">Evaluate</text>
   <text x="1105" y="714" text-anchor="middle" font-size="7" fill="#00695c">benchmark gate</text>
-  <text x="1105" y="726" text-anchor="middle" font-size="7" fill="#00695c">28-scenario suite</text>
+  <text x="1105" y="726" text-anchor="middle" font-size="7" fill="#00695c">full scenario suite</text>
 
   <!-- Pipeline arrows -->
   <line x1="192" y1="707" x2="213" y2="707" stroke="#999" stroke-width="1.5" marker-end="url(#arr-gray)"/>
@@ -266,26 +266,25 @@
   <text x="305" y="813" text-anchor="middle" font-size="14" font-weight="bold" fill="#555">Versioning + Lock</text>
 
   <rect x="35" y="825" width="170" height="55" rx="6" fill="#fff" stroke="#999" stroke-width="1"/>
-  <text x="120" y="845" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">pyproject.toml</text>
+  <text x="120" y="845" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">Project Config</text>
   <text x="120" y="862" text-anchor="middle" font-size="9" fill="#888">version tracked</text>
-  <text x="120" y="875" text-anchor="middle" font-size="7" fill="#aaa">requires-python &gt;=3.12</text>
 
   <rect x="220" y="825" width="180" height="55" rx="6" fill="#fff" stroke="#999" stroke-width="1"/>
-  <text x="310" y="845" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">LOCK.json</text>
-  <text x="310" y="862" text-anchor="middle" font-size="9" fill="#888">integrity manifest</text>
-  <text x="310" y="875" text-anchor="middle" font-size="7" fill="#aaa">SHA-256 verified per file</text>
+  <text x="310" y="845" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">Integrity Manifest</text>
+  <text x="310" y="862" text-anchor="middle" font-size="9" fill="#888">integrity verification</text>
+  <text x="310" y="875" text-anchor="middle" font-size="7" fill="#aaa">hash verified per file</text>
 
   <rect x="415" y="825" width="160" height="55" rx="6" fill="#fff" stroke="#999" stroke-width="1"/>
-  <text x="495" y="845" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">VERSIONING.md</text>
-  <text x="495" y="862" text-anchor="middle" font-size="9" fill="#888">release history</text>
+  <text x="495" y="845" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">Release History</text>
+  <text x="495" y="862" text-anchor="middle" font-size="9" fill="#888">version changelog</text>
 
   <!-- ======================================================== -->
   <!-- SECTION 7: FILE INVENTORY (Bottom Right) -->
   <!-- ======================================================== -->
   <rect x="610" y="790" width="570" height="110" rx="10" fill="#e8f5e9" fill-opacity="0.15" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6"/>
-  <text x="895" y="813" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e7d32">New/Modified Files</text>
+  <text x="895" y="813" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e7d32">Components</text>
 
-  <text x="625" y="835" font-size="9" font-weight="bold" fill="#2e7d32">Components:</text>
+  <text x="625" y="835" font-size="9" font-weight="bold" fill="#2e7d32">Modules:</text>
   <text x="625" y="850" font-size="8" fill="#388e3c">Doctrine engine (formation + regret)</text>
   <text x="625" y="863" font-size="8" fill="#388e3c">Doctrine store (persistence + versioning)</text>
   <text x="625" y="876" font-size="8" fill="#388e3c">Feedback rule engine (bounded deltas)</text>
@@ -311,7 +310,7 @@
   <rect x="610" y="905" width="12" height="12" rx="2" fill="#00695c"/>
   <text x="627" y="914" font-size="7" fill="#555">Evaluator</text>
   <rect x="685" y="905" width="12" height="12" rx="2" fill="#2e7d32"/>
-  <text x="702" y="914" font-size="7" fill="#555">Outputs/Files</text>
+  <text x="702" y="914" font-size="7" fill="#555">Outputs</text>
   <rect x="765" y="905" width="12" height="12" rx="2" fill="#c62828"/>
   <text x="782" y="914" font-size="7" fill="#555">Invariants</text>
 </svg>

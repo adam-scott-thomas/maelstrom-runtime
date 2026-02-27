@@ -31,18 +31,18 @@
 
   <!-- Title -->
   <text x="600" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">Maelstrom Cognitive Architecture</text>
-  <text x="600" y="58" text-anchor="middle" font-size="12" fill="#777">Deterministic Execution Block (Whitepaper Appendix A.3)</text>
+  <text x="600" y="58" text-anchor="middle" font-size="12" fill="#777">Deterministic Execution Block</text>
 
   <!-- ======================================================== -->
   <!-- STRESSOR FIELD S(t) -->
   <!-- ======================================================== -->
   <rect x="340" y="75" width="460" height="55" rx="8" fill="#fff8e1" stroke="#e6a800" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="570" y="96" text-anchor="middle" font-size="13" font-weight="bold" fill="#b38600">Stressor Field S(t)</text>
-  <text x="570" y="114" text-anchor="middle" font-size="9" fill="#997a00">time_pressure | ambiguity | threat_level | moral_weight | failure_count | boredom | opportunity | competition | novelty | resource_decay | inertia</text>
+  <text x="570" y="96" text-anchor="middle" font-size="13" font-weight="bold" fill="#b38600">Stressor Field</text>
+  <text x="570" y="114" text-anchor="middle" font-size="9" fill="#997a00">Multi-dimensional environmental signal vector</text>
 
   <!-- Spec Input -->
   <rect x="40" y="80" width="110" height="50" rx="6" fill="#f0f0f0" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
-  <text x="95" y="101" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Spec JSON</text>
+  <text x="95" y="101" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Scenario Spec</text>
   <text x="95" y="118" text-anchor="middle" font-size="9" fill="#888">scenario input</text>
   <line x1="150" y1="105" x2="338" y2="100" stroke="#999" stroke-width="1" marker-end="url(#arrow-gray)"/>
 
@@ -54,14 +54,14 @@
 
   <rect x="35" y="190" width="205" height="42" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="1"/>
   <text x="138" y="207" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6800">Penalty Signal</text>
-  <text x="138" y="223" text-anchor="middle" font-size="9" fill="#997a00">P_r(t) = w_r . S(t) + u_r . C(t)</text>
+  <text x="138" y="223" text-anchor="middle" font-size="9" fill="#997a00">weighted signal composition</text>
 
   <rect x="35" y="245" width="205" height="38" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="1"/>
   <text x="138" y="262" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6800">Gradient</text>
-  <text x="138" y="276" text-anchor="middle" font-size="9" fill="#997a00">dP_r/dt (smoothed window)</text>
+  <text x="138" y="276" text-anchor="middle" font-size="9" fill="#997a00">temporal gradient (smoothed)</text>
 
   <rect x="35" y="296" width="205" height="48" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="1"/>
-  <text x="138" y="313" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6800">r*(t) = argmax dP_r/dt</text>
+  <text x="138" y="313" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6800">Regime Selection</text>
   <text x="138" y="327" text-anchor="middle" font-size="9" fill="#997a00">+ asymmetric inertia</text>
   <text x="138" y="339" text-anchor="middle" font-size="9" fill="#997a00">+ deterministic tiebreak</text>
 
@@ -82,7 +82,7 @@
   <!-- Inertia box -->
   <rect x="40" y="425" width="195" height="45" rx="6" fill="#fff8e1" stroke="#e6a800" stroke-width="0.8" stroke-dasharray="3"/>
   <text x="138" y="441" text-anchor="middle" font-size="9" font-weight="bold" fill="#997a00">Asymmetric Inertia</text>
-  <text x="138" y="455" text-anchor="middle" font-size="8" fill="#997a00">out_of_X: stickiness | into_X: entry barrier</text>
+  <text x="138" y="455" text-anchor="middle" font-size="8" fill="#997a00">directional resistance</text>
   <text x="138" y="465" text-anchor="middle" font-size="8" fill="#997a00">survival: easy in, hard out</text>
 
   <!-- Arrows within regime -->
@@ -96,29 +96,21 @@
   <!-- CORE COGNITIVE LOOP — Center Pentagon -->
   <!-- ======================================================== -->
 
-  <!-- Phase positions (pentagon): E(top), G(upper-right), S(lower-right), X(lower-left), R(upper-left) -->
-  <!-- E: 580,195  G: 735,305  S: 695,440  X: 465,440  R: 425,305 -->
-
   <!-- Phase ellipses -->
   <ellipse cx="580" cy="205" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
-  <text x="580" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">EVALUATE</text>
-  <text x="580" y="216" text-anchor="middle" font-size="8" fill="#4a7ab5">Kestrel Adar</text>
+  <text x="580" y="208" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">EVALUATE</text>
 
   <ellipse cx="735" cy="315" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
-  <text x="735" y="310" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">GENERATE</text>
-  <text x="735" y="326" text-anchor="middle" font-size="8" fill="#4a7ab5">Dorian Vale</text>
+  <text x="735" y="318" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">GENERATE</text>
 
   <ellipse cx="695" cy="450" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
-  <text x="695" y="445" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">SELECT</text>
-  <text x="695" y="461" text-anchor="middle" font-size="8" fill="#4a7ab5">Helene Quatre</text>
+  <text x="695" y="453" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">SELECT</text>
 
   <ellipse cx="465" cy="450" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
-  <text x="465" y="445" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">EXECUTE</text>
-  <text x="465" y="461" text-anchor="middle" font-size="8" fill="#4a7ab5">Vance Calderon</text>
+  <text x="465" y="453" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">EXECUTE</text>
 
   <ellipse cx="425" cy="315" rx="65" ry="32" fill="#e3f0fd" stroke="#4a7ab5" stroke-width="2" filter="url(#shadow)"/>
-  <text x="425" y="310" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">REFLECT</text>
-  <text x="425" y="326" text-anchor="middle" font-size="8" fill="#4a7ab5">Isolde Marek</text>
+  <text x="425" y="318" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5a8a">REFLECT</text>
 
   <!-- Canonical transitions (solid blue, clockwise) -->
   <line x1="635" y1="220" x2="678" y2="290" stroke="#4a7ab5" stroke-width="2.5" marker-end="url(#arrow)"/>
@@ -128,7 +120,7 @@
   <line x1="470" y1="295" x2="525" y2="228" stroke="#4a7ab5" stroke-width="2.5" marker-end="url(#arrow)"/>
 
   <!-- Fragile transition label on S->X -->
-  <text x="580" y="470" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">A=0.45 (fragile)</text>
+  <text x="580" y="470" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">constrained transition</text>
 
   <!-- ======================================================== -->
   <!-- BYPASS PATHS — Dashed colored arrows -->
@@ -173,14 +165,13 @@
   <!-- Identity Veto -->
   <polygon points="963,218 1040,235 1040,275 963,292 886,275 886,235" fill="#e8f5e9" stroke="#55883b" stroke-width="1.5"/>
   <text x="963" y="247" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e6b1e">Identity Veto</text>
-  <text x="963" y="261" text-anchor="middle" font-size="8" fill="#55883b">moral_weight > 0.85</text>
+  <text x="963" y="261" text-anchor="middle" font-size="8" fill="#55883b">constraint boundary</text>
   <text x="963" y="275" text-anchor="middle" font-size="8" fill="#55883b">blocks: execute</text>
 
   <!-- Coalition Veto -->
   <polygon points="963,308 1040,325 1040,365 963,382 886,365 886,325" fill="#e8f5e9" stroke="#55883b" stroke-width="1.5"/>
   <text x="963" y="332" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e6b1e">Coalition Veto</text>
-  <text x="963" y="346" text-anchor="middle" font-size="8" fill="#55883b">competition > 0.65 AND</text>
-  <text x="963" y="358" text-anchor="middle" font-size="8" fill="#55883b">resource_decay > 0.55</text>
+  <text x="963" y="350" text-anchor="middle" font-size="8" fill="#55883b">composite constraint</text>
   <text x="963" y="372" text-anchor="middle" font-size="8" fill="#55883b">blocks: select, execute</text>
 
   <!-- Veto arrows to phases -->
@@ -192,24 +183,24 @@
   <!-- ======================================================== -->
   <rect x="850" y="410" width="225" height="85" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
   <text x="963" y="432" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Legality Deformation</text>
-  <text x="963" y="448" text-anchor="middle" font-size="9" fill="#777">A'_ij = A_ij - a_ij . S(t)</text>
-  <text x="963" y="461" text-anchor="middle" font-size="9" fill="#777">W'_ij = W_ij + b_ij . S(t)</text>
-  <text x="963" y="480" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">A' &lt;= 0 -> governance_disallow</text>
+  <text x="963" y="448" text-anchor="middle" font-size="9" fill="#777">stress-adjusted accessibility</text>
+  <text x="963" y="461" text-anchor="middle" font-size="9" fill="#777">stress-adjusted weight</text>
+  <text x="963" y="480" text-anchor="middle" font-size="8" font-weight="bold" fill="#cc3333">governance gating on constraint violation</text>
 
   <!-- ======================================================== -->
   <!-- CONSTRAINT STATE C(t) — Bottom Left -->
   <!-- ======================================================== -->
   <rect x="20" y="510" width="220" height="115" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1" filter="url(#shadow)"/>
-  <text x="130" y="530" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Constraint State C(t)</text>
-  <text x="38" y="548" font-size="9" fill="#777">[0] governance_disallow</text>
-  <text x="38" y="562" font-size="9" fill="#777">[1] identity_veto</text>
-  <text x="38" y="576" font-size="9" fill="#777">[2] coalition_veto / [3] drag</text>
-  <text x="38" y="590" font-size="9" fill="#777">[4] bypass_count (exp. decay)</text>
-  <text x="38" y="604" font-size="9" fill="#777">[5] regime_age</text>
+  <text x="130" y="530" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Constraint State</text>
+  <text x="38" y="548" font-size="9" fill="#777">governance disallow</text>
+  <text x="38" y="562" font-size="9" fill="#777">identity veto</text>
+  <text x="38" y="576" font-size="9" fill="#777">coalition veto / drag</text>
+  <text x="38" y="590" font-size="9" fill="#777">bypass accumulation (decayed)</text>
+  <text x="38" y="604" font-size="9" fill="#777">regime age</text>
 
   <!-- C(t) feedback to penalty -->
   <path d="M130,510 L130,500 L15,500 L15,220 L33,220" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-gray)"/>
-  <text x="18" y="370" font-size="8" fill="#999" transform="rotate(-90,18,370)">u_r . C(t)</text>
+  <text x="18" y="370" font-size="8" fill="#999" transform="rotate(-90,18,370)">constraint feedback</text>
 
   <!-- ======================================================== -->
   <!-- DOCTRINE ENGINE — Bottom Center -->
@@ -219,8 +210,8 @@
 
   <rect x="295" y="575" width="115" height="50" rx="6" fill="#f3e5f5" stroke="#8855aa" stroke-width="1"/>
   <text x="353" y="593" text-anchor="middle" font-size="10" font-weight="bold" fill="#6a3d80">Regret</text>
-  <text x="353" y="607" text-anchor="middle" font-size="8" fill="#8855aa">max(counterfactual)</text>
-  <text x="353" y="619" text-anchor="middle" font-size="8" fill="#8855aa">- selected_value</text>
+  <text x="353" y="607" text-anchor="middle" font-size="8" fill="#8855aa">counterfactual</text>
+  <text x="353" y="619" text-anchor="middle" font-size="8" fill="#8855aa">comparative analysis</text>
 
   <rect x="425" y="575" width="115" height="50" rx="6" fill="#f3e5f5" stroke="#8855aa" stroke-width="1"/>
   <text x="483" y="593" text-anchor="middle" font-size="10" font-weight="bold" fill="#6a3d80">Counterfactual</text>
@@ -229,8 +220,8 @@
 
   <rect x="555" y="575" width="130" height="50" rx="6" fill="#f3e5f5" stroke="#8855aa" stroke-width="1"/>
   <text x="620" y="593" text-anchor="middle" font-size="10" font-weight="bold" fill="#6a3d80">Doctrine</text>
-  <text x="620" y="607" text-anchor="middle" font-size="8" fill="#8855aa">sensitivity_adj</text>
-  <text x="620" y="619" text-anchor="middle" font-size="8" fill="#8855aa">regime_bias | veto_pattern</text>
+  <text x="620" y="607" text-anchor="middle" font-size="8" fill="#8855aa">sensitivity adjustment</text>
+  <text x="620" y="619" text-anchor="middle" font-size="8" fill="#8855aa">adaptive adjustments</text>
 
   <!-- Execute to doctrine -->
   <path d="M465,482 L465,500 L400,500 L400,540" fill="none" stroke="#8855aa" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-purple)"/>
@@ -242,18 +233,18 @@
   <text x="910" y="560" text-anchor="middle" font-size="14" font-weight="bold" fill="#666">Trace Output</text>
 
   <rect x="765" y="575" width="85" height="50" rx="4" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
-  <text x="808" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">trace.jsonl</text>
-  <text x="808" y="607" text-anchor="middle" font-size="8" fill="#888">1 record/cycle</text>
+  <text x="808" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">Cycle Log</text>
+  <text x="808" y="607" text-anchor="middle" font-size="8" fill="#888">per-cycle record</text>
   <text x="808" y="619" text-anchor="middle" font-size="8" fill="#888">append-only</text>
 
   <rect x="860" y="575" width="95" height="50" rx="4" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
-  <text x="908" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">summary.json</text>
-  <text x="908" y="607" text-anchor="middle" font-size="8" fill="#888">regime dist.</text>
+  <text x="908" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">Run Summary</text>
+  <text x="908" y="607" text-anchor="middle" font-size="8" fill="#888">regime distribution</text>
   <text x="908" y="619" text-anchor="middle" font-size="8" fill="#888">switches/vetoes</text>
 
   <rect x="965" y="575" width="95" height="50" rx="4" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
-  <text x="1013" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">trace_human</text>
-  <text x="1013" y="607" text-anchor="middle" font-size="8" fill="#888">.md narrative</text>
+  <text x="1013" y="593" text-anchor="middle" font-size="9" font-weight="bold" fill="#555">Narrative</text>
+  <text x="1013" y="607" text-anchor="middle" font-size="8" fill="#888">human-readable</text>
   <text x="1013" y="619" text-anchor="middle" font-size="8" fill="#888">blocked switches</text>
 
   <!-- ======================================================== -->
@@ -288,9 +279,9 @@
   <!-- ======================================================== -->
   <rect x="20" y="660" width="225" height="80" rx="8" fill="white" stroke="#ddd" stroke-width="1"/>
   <text x="133" y="680" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Scenarios</text>
-  <text x="38" y="698" font-size="9" fill="#555">Meridian V0: 48c, stability narrative</text>
-  <text x="38" y="714" font-size="9" fill="#555">Crucible V0: 64c, stress harness</text>
-  <text x="38" y="730" font-size="9" fill="#888">All 5 bypasses + 2 vetoes active</text>
+  <text x="38" y="698" font-size="9" fill="#555">Stability narrative</text>
+  <text x="38" y="714" font-size="9" fill="#555">Stress harness</text>
+  <text x="38" y="730" font-size="9" fill="#888">All bypass paths + vetoes active</text>
 
   <!-- S(t) to legality -->
   <path d="M800,102 L963,102 L963,410" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4" marker-end="url(#arrow-gray)"/>

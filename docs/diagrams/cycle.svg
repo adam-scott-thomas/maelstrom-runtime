@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e17"/>
+      <stop offset="100%" style="stop-color:#0f1724"/>
+    </linearGradient>
+    <filter id="gl">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glS">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,1 L6,4 L0,7" fill="none" stroke="#2a6fff" stroke-width="1.2"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,1 L6,4 L0,7" fill="none" stroke="#ff3b3b" stroke-width="1.2"/>
+    </marker>
+    <pattern id="gr" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#1a2440" stroke-width="0.4"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bgG)"/>
+  <rect width="800" height="600" fill="url(#gr)" opacity="0.3"/>
+
+  <!-- Title -->
+  <text x="400" y="45" font-family="'Helvetica Neue', Helvetica, sans-serif" font-size="22" fill="#ffffff" text-anchor="middle" font-weight="bold" letter-spacing="1">5-PHASE COGNITIVE CYCLE</text>
+  <text x="400" y="68" font-family="monospace" font-size="11" fill="#556688" text-anchor="middle">Evaluate → Generate → Select → Execute → Reflect → loop</text>
+
+  <!-- Central glow -->
+  <ellipse cx="400" cy="330" rx="200" ry="180" fill="#1a2d5a" opacity="0.08"/>
+
+  <!-- Phase 1: EVALUATE (top center) -->
+  <g filter="url(#gl)">
+    <rect x="320" y="105" width="160" height="52" rx="8" fill="#0f1724" stroke="#00c8ff" stroke-width="2"/>
+    <text x="400" y="125" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">PHASE 1</text>
+    <text x="400" y="143" font-family="monospace" font-size="15" fill="#00c8ff" text-anchor="middle" font-weight="bold">EVALUATE</text>
+  </g>
+  <text x="400" y="175" font-family="monospace" font-size="9" fill="#445566" text-anchor="middle">Assess state &amp; stressors</text>
+
+  <!-- Phase 2: GENERATE (left) -->
+  <g filter="url(#gl)">
+    <rect x="115" y="234" width="160" height="52" rx="8" fill="#0f1724" stroke="#2a6fff" stroke-width="2"/>
+    <text x="195" y="254" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">PHASE 2</text>
+    <text x="195" y="272" font-family="monospace" font-size="15" fill="#2a6fff" text-anchor="middle" font-weight="bold">GENERATE</text>
+  </g>
+  <text x="195" y="304" font-family="monospace" font-size="9" fill="#445566" text-anchor="middle">Proposals from competing regimes</text>
+
+  <!-- Phase 3: SELECT (bottom left) -->
+  <g filter="url(#gl)">
+    <rect x="160" y="400" width="160" height="52" rx="8" fill="#0f1724" stroke="#ff3b3b" stroke-width="2"/>
+    <text x="240" y="420" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">PHASE 3</text>
+    <text x="240" y="438" font-family="monospace" font-size="15" fill="#ff6b35" text-anchor="middle" font-weight="bold">SELECT</text>
+  </g>
+  <text x="240" y="470" font-family="monospace" font-size="9" fill="#445566" text-anchor="middle">Gradient scoring + hysteresis</text>
+
+  <!-- Phase 4: EXECUTE (bottom right) -->
+  <g filter="url(#gl)">
+    <rect x="480" y="400" width="160" height="52" rx="8" fill="#0f1724" stroke="#00ff88" stroke-width="2"/>
+    <text x="560" y="420" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">PHASE 4</text>
+    <text x="560" y="438" font-family="monospace" font-size="15" fill="#00ff88" text-anchor="middle" font-weight="bold">EXECUTE</text>
+  </g>
+  <text x="560" y="470" font-family="monospace" font-size="9" fill="#445566" text-anchor="middle">Carry out chosen action</text>
+
+  <!-- Phase 5: REFLECT (right) -->
+  <g filter="url(#gl)">
+    <rect x="525" y="234" width="160" height="52" rx="8" fill="#0f1724" stroke="#bb88ff" stroke-width="2"/>
+    <text x="605" y="254" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">PHASE 5</text>
+    <text x="605" y="272" font-family="monospace" font-size="15" fill="#bb88ff" text-anchor="middle" font-weight="bold">REFLECT</text>
+  </g>
+  <text x="605" y="304" font-family="monospace" font-size="9" fill="#445566" text-anchor="middle">Regret via counterfactuals</text>
+
+  <!-- Connection arrows -->
+  <!-- EVALUATE → GENERATE -->
+  <line x1="325" y1="145" x2="275" y2="234" stroke="#2a6fff" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <!-- GENERATE → SELECT -->
+  <line x1="205" y1="286" x2="225" y2="400" stroke="#2a6fff" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <!-- SELECT → EXECUTE -->
+  <line x1="320" y1="430" x2="480" y2="430" stroke="#2a6fff" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <!-- EXECUTE → REFLECT -->
+  <line x1="595" y1="400" x2="610" y2="286" stroke="#2a6fff" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <!-- REFLECT → EVALUATE (loop back) -->
+  <line x1="600" y1="234" x2="475" y2="145" stroke="#ff3b3b" stroke-width="1.5" marker-end="url(#arrowRed)" opacity="0.5" stroke-dasharray="6,4"/>
+
+  <!-- Loop label -->
+  <text x="560" y="195" font-family="monospace" font-size="9" fill="#ff3b3b" opacity="0.7" transform="rotate(-30,560,195)">loop</text>
+
+  <!-- Bypass indicators -->
+  <g opacity="0.4">
+    <text x="400" y="530" font-family="monospace" font-size="10" fill="#ff3b3b" text-anchor="middle">⚡ BYPASS COLLAPSE</text>
+    <text x="400" y="548" font-family="monospace" font-size="9" fill="#556688" text-anchor="middle">When S(t) exceeds threshold → deliberation collapses to shortcut</text>
+    <line x1="200" y1="515" x2="600" y2="515" stroke="#ff3b3b" stroke-width="0.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Stress indicator -->
+  <g opacity="0.5">
+    <text x="50" y="540" font-family="monospace" font-size="9" fill="#ff3b3b">S(t) ↑</text>
+    <rect x="80" y="530" width="60" height="6" rx="3" fill="#1a2440" stroke="#ff3b3b" stroke-width="0.5"/>
+    <rect x="80" y="530" width="40" height="6" rx="3" fill="#ff3b3b" opacity="0.6"/>
+  </g>
+
+  <!-- Bottom border -->
+  <rect x="0" y="597" width="800" height="3" fill="#2a6fff" opacity="0.3"/>
+</svg>

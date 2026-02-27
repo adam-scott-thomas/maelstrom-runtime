@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e17"/>
+      <stop offset="100%" style="stop-color:#0f1724"/>
+    </linearGradient>
+    <filter id="g3">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="gr3" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#1a2440" stroke-width="0.4"/>
+    </pattern>
+    <marker id="a3" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,1 L5,3.5 L0,6" fill="none" stroke="#ff3b3b" stroke-width="1"/>
+    </marker>
+    <marker id="a3b" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,1 L5,3.5 L0,6" fill="none" stroke="#556688" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="440" fill="url(#bg3)"/>
+  <rect width="800" height="440" fill="url(#gr3)" opacity="0.3"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="'Helvetica Neue', Helvetica, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle" font-weight="bold">BYPASS COLLAPSE MODES</text>
+  <text x="400" y="55" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">When S(t) exceeds thresholds, full deliberation collapses into shortcuts</text>
+
+  <!-- Central stress node -->
+  <g filter="url(#g3)">
+    <rect x="310" y="85" width="180" height="55" rx="8" fill="#1a0a0a" stroke="#ff3b3b" stroke-width="2"/>
+    <text x="400" y="107" font-family="monospace" font-size="11" fill="#ff3b3b" text-anchor="middle" font-weight="bold">STRESS THRESHOLD</text>
+    <text x="400" y="125" font-family="monospace" font-size="12" fill="#ff6b35" text-anchor="middle">S(t) &gt; T_bypass</text>
+  </g>
+
+  <!-- Normal path (left) -->
+  <line x1="310" y1="112" x2="150" y2="112" stroke="#556688" stroke-width="1" marker-end="url(#a3b)" stroke-dasharray="4,3" opacity="0.5"/>
+  <rect x="40" y="90" width="110" height="44" rx="6" fill="#0f1724" stroke="#334466" stroke-width="1"/>
+  <text x="95" y="108" font-family="monospace" font-size="9" fill="#556688" text-anchor="middle">S(t) &lt; T_bypass</text>
+  <text x="95" y="124" font-family="monospace" font-size="10" fill="#00c8ff" text-anchor="middle">DELIBERATE</text>
+
+  <!-- Bypass branches -->
+  <!-- Branch lines from center -->
+  <line x1="340" y1="140" x2="120" y2="220" stroke="#ff3b3b" stroke-width="1.5" marker-end="url(#a3)" opacity="0.6"/>
+  <line x1="370" y1="140" x2="280" y2="220" stroke="#ff3b3b" stroke-width="1.5" marker-end="url(#a3)" opacity="0.6"/>
+  <line x1="400" y1="140" x2="400" y2="220" stroke="#ff3b3b" stroke-width="1.5" marker-end="url(#a3)" opacity="0.6"/>
+  <line x1="430" y1="140" x2="520" y2="220" stroke="#ff3b3b" stroke-width="1.5" marker-end="url(#a3)" opacity="0.6"/>
+  <line x1="460" y1="140" x2="660" y2="220" stroke="#ff3b3b" stroke-width="1.5" marker-end="url(#a3)" opacity="0.6"/>
+
+  <!-- IMPULSE -->
+  <g filter="url(#g3)">
+    <rect x="45" y="220" width="150" height="48" rx="8" fill="#0f1724" stroke="#ff3b3b" stroke-width="1.5"/>
+    <text x="120" y="242" font-family="monospace" font-size="13" fill="#ff3b3b" text-anchor="middle" font-weight="bold">IMPULSE</text>
+    <text x="120" y="258" font-family="monospace" font-size="9" fill="#556688" text-anchor="middle">Survival dominance</text>
+  </g>
+  <rect x="60" y="280" width="120" height="50" rx="5" fill="#0a0e17" stroke="#1a2440" stroke-width="1" opacity="0.8"/>
+  <text x="120" y="298" font-family="monospace" font-size="8" fill="#ff3b3b" text-anchor="middle">HIGH INTENSITY</text>
+  <text x="120" y="312" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Fast protective action</text>
+  <text x="120" y="324" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Skip GENERATE/SELECT</text>
+
+  <!-- RUMINATION -->
+  <g filter="url(#g3)">
+    <rect x="205" y="220" width="150" height="48" rx="8" fill="#0f1724" stroke="#2a6fff" stroke-width="1.5"/>
+    <text x="280" y="242" font-family="monospace" font-size="13" fill="#2a6fff" text-anchor="middle" font-weight="bold">RUMINATION</text>
+    <text x="280" y="258" font-family="monospace" font-size="9" fill="#556688" text-anchor="middle">Epistemic lock</text>
+  </g>
+  <rect x="220" y="280" width="120" height="50" rx="5" fill="#0a0e17" stroke="#1a2440" stroke-width="1" opacity="0.8"/>
+  <text x="280" y="298" font-family="monospace" font-size="8" fill="#2a6fff" text-anchor="middle">ANALYSIS LOOP</text>
+  <text x="280" y="312" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Prolonged ambiguity</text>
+  <text x="280" y="324" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Can't exit GENERATE</text>
+
+  <!-- MANIA -->
+  <g filter="url(#g3)">
+    <rect x="325" y="220" width="150" height="48" rx="8" fill="#0f1724" stroke="#ffaa00" stroke-width="1.5"/>
+    <text x="400" y="242" font-family="monospace" font-size="13" fill="#ffaa00" text-anchor="middle" font-weight="bold">MANIA</text>
+    <text x="400" y="258" font-family="monospace" font-size="9" fill="#556688" text-anchor="middle">Economic overreach</text>
+  </g>
+  <rect x="340" y="280" width="120" height="50" rx="5" fill="#0a0e17" stroke="#1a2440" stroke-width="1" opacity="0.8"/>
+  <text x="400" y="298" font-family="monospace" font-size="8" fill="#ffaa00" text-anchor="middle">OVERCOMMIT</text>
+  <text x="400" y="312" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Resource capture fixation</text>
+  <text x="400" y="324" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">SELECT skewed to gain</text>
+
+  <!-- GUILT -->
+  <g filter="url(#g3)">
+    <rect x="445" y="220" width="150" height="48" rx="8" fill="#0f1724" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="520" y="242" font-family="monospace" font-size="13" fill="#00ff88" text-anchor="middle" font-weight="bold">GUILT</text>
+    <text x="520" y="258" font-family="monospace" font-size="9" fill="#556688" text-anchor="middle">Moral/Legal self-punish</text>
+  </g>
+  <rect x="460" y="280" width="120" height="50" rx="5" fill="#0a0e17" stroke="#1a2440" stroke-width="1" opacity="0.8"/>
+  <text x="520" y="298" font-family="monospace" font-size="8" fill="#00ff88" text-anchor="middle">SELF-PENALTY</text>
+  <text x="520" y="312" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Identity constraint</text>
+  <text x="520" y="324" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Refuses at own cost</text>
+
+  <!-- OVER-LEARNING -->
+  <g filter="url(#g3)">
+    <rect x="590" y="220" width="165" height="48" rx="8" fill="#0f1724" stroke="#bb88ff" stroke-width="1.5"/>
+    <text x="672" y="242" font-family="monospace" font-size="13" fill="#bb88ff" text-anchor="middle" font-weight="bold">OVER-LEARNING</text>
+    <text x="672" y="258" font-family="monospace" font-size="9" fill="#556688" text-anchor="middle">Epistemic/Econ fixation</text>
+  </g>
+  <rect x="612" y="280" width="120" height="50" rx="5" fill="#0a0e17" stroke="#1a2440" stroke-width="1" opacity="0.8"/>
+  <text x="672" y="298" font-family="monospace" font-size="8" fill="#bb88ff" text-anchor="middle">PATTERN LOCK</text>
+  <text x="672" y="312" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">Past-data dominance</text>
+  <text x="672" y="324" font-family="monospace" font-size="8" fill="#445566" text-anchor="middle">REFLECT overrides all</text>
+
+  <!-- Regime source labels -->
+  <text x="120" y="345" font-family="monospace" font-size="7" fill="#ff3b3b" text-anchor="middle" opacity="0.5">← SURVIVAL</text>
+  <text x="280" y="345" font-family="monospace" font-size="7" fill="#2a6fff" text-anchor="middle" opacity="0.5">← EPISTEMIC</text>
+  <text x="400" y="345" font-family="monospace" font-size="7" fill="#ffaa00" text-anchor="middle" opacity="0.5">← ECONOMIC</text>
+  <text x="520" y="345" font-family="monospace" font-size="7" fill="#00ff88" text-anchor="middle" opacity="0.5">← MORAL+LEGAL</text>
+  <text x="672" y="345" font-family="monospace" font-size="7" fill="#bb88ff" text-anchor="middle" opacity="0.5">← EPIST+ECON</text>
+
+  <!-- Formula bar -->
+  <rect x="80" y="370" width="640" height="40" rx="5" fill="#0a0e17" stroke="#1a2440" stroke-width="1" opacity="0.8"/>
+  <text x="400" y="388" font-family="monospace" font-size="10" fill="#556688" text-anchor="middle">Legality deformation:  A'_ij = A_ij - α·S(t)   |   W'_ij = W_ij + β·S(t)</text>
+  <text x="400" y="403" font-family="monospace" font-size="9" fill="#445566" text-anchor="middle">High stress → more transitions inadmissible → higher transition costs</text>
+
+  <!-- Bottom border -->
+  <rect x="0" y="437" width="800" height="3" fill="#ff3b3b" opacity="0.2"/>
+</svg>

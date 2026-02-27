@@ -7,7 +7,7 @@ name = "maelstrom-runtime"
 version = "2.2.0"
 description = "Reference implementation of the Maelstrom Runtime cognitive architecture"
 requires-python = ">=3.12"
-license = {text = "MIT"}
+license = {text = "Proprietary"}
 
 [tool.setuptools.packages.find]
 include = ["maelstrom*"]
