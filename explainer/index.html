@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maelstrom Runtime — Interactive Explainer</title>
+  <meta name="description" content="A deterministic cognitive architecture for volitional decision-making under stress and constraint. Interactive technical explainer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- Progress bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <span class="nav-logo">MAELSTROM</span>
+    <div class="nav-links">
+      <a href="#intro" data-section="intro">Intro</a>
+      <a href="#loop" data-section="loop">The Loop</a>
+      <a href="#regimes" data-section="regimes">Regimes</a>
+      <a href="#stress" data-section="stress">Stress</a>
+      <a href="#bypass" data-section="bypass">Bypass</a>
+      <a href="#regret" data-section="regret">Regret</a>
+      <a href="#determinism" data-section="determinism">Determinism</a>
+      <a href="#why" data-section="why">Why</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1: INTRO -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="intro" class="section section--hero">
+    <div class="section__inner">
+      <div class="hero-text">
+        <p class="overline">A Deterministic Cognitive Architecture</p>
+        <h1>A mind navigating<br/><span class="accent">a storm.</span></h1>
+        <p class="hero-sub">
+          Most AI systems optimize a single objective.<br/>
+          Reality does not.
+        </p>
+        <p class="hero-sub">
+          Survival, legality, morality, uncertainty, and opportunity compete in real time.
+          When pressures conflict, how does a system decide?
+        </p>
+        <p class="hero-sub">
+          Maelstrom models cognition as <strong>regime arbitration under constraint</strong>.
+        </p>
+        <p class="hero-sub">
+          Not a unified planner.<br/>
+          A structured competition of incompatible objectives &mdash; resolved through deterministic arbitration.
+        </p>
+      </div>
+      <div class="hero-visual" id="storm-visual">
+        <!-- D3 animated storm/regime particle visualization -->
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: THE FIVE-PHASE LOOP -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="loop" class="section">
+    <div class="section__inner section__inner--split">
+      <div class="text-col">
+        <p class="overline">The Core Loop</p>
+        <h2>Five phases.<br/>Every cycle.</h2>
+        <p>
+          Each decision passes through structured conflict:
+        </p>
+        <div class="phase-cards" id="phase-cards">
+          <div class="phase-card" data-phase="evaluate">
+            <div class="phase-dot" style="--c: var(--evaluate)"></div>
+            <div>
+              <strong>Evaluate</strong>
+              <span class="phase-desc">Clarity, risk assessment</span>
+            </div>
+          </div>
+          <div class="phase-card" data-phase="generate">
+            <div class="phase-dot" style="--c: var(--generate)"></div>
+            <div>
+              <strong>Generate</strong>
+              <span class="phase-desc">Optionality, alternative paths</span>
+            </div>
+          </div>
+          <div class="phase-card" data-phase="select">
+            <div class="phase-dot" style="--c: var(--select)"></div>
+            <div>
+              <strong>Select</strong>
+              <span class="phase-desc">Defensibility under regime constraints</span>
+            </div>
+          </div>
+          <div class="phase-card" data-phase="execute">
+            <div class="phase-dot" style="--c: var(--execute)"></div>
+            <div>
+              <strong>Execute</strong>
+              <span class="phase-desc">Commitment and action</span>
+            </div>
+          </div>
+          <div class="phase-card" data-phase="reflect">
+            <div class="phase-dot" style="--c: var(--reflect)"></div>
+            <div>
+              <strong>Reflect</strong>
+              <span class="phase-desc">Structural comparison and regret</span>
+            </div>
+          </div>
+        </div>
+        <p class="aside">
+          Conflict is not failure.<br/>
+          It is the mechanism through which volition emerges.
+        </p>
+      </div>
+      <div class="visual-col" id="loop-visual">
+        <!-- D3 animated 5-phase cycle ring -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: REGIME ARBITRATION -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="regimes" class="section">
+    <div class="section__inner section__inner--split">
+      <div class="text-col">
+        <p class="overline">Regime Arbitration</p>
+        <h2>Six regimes.<br/>One active at a time.</h2>
+        <p>
+          At any moment, one regime dominates because its penalty gradient is rising fastest.
+        </p>
+        <div class="formula-block">
+          <code>r*(t) = argmax<sub>r</sub> (&Delta;P<sub>r</sub> / &Delta;t)</code>
+          <span class="formula-label">The system does not "choose" a regime. The environment forces the shift.</span>
+        </div>
+        <div class="regime-legend" id="regime-legend"></div>
+        <p>
+          Transitions are <strong>hysteretic</strong>:
+        </p>
+        <p>
+          Entry into crisis is fast.<br/>
+          Recovery is slow.
+        </p>
+        <p class="aside">
+          Arbitration is continuous.<br/>
+          Dominance is emergent.
+        </p>
+      </div>
+      <div class="visual-col" id="regime-visual">
+        <!-- D3 animated regime competition bars -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: LEGALITY DEFORMATION -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="stress" class="section">
+    <div class="section__inner section__inner--split">
+      <div class="text-col">
+        <p class="overline">Legality Deformation</p>
+        <h2>Stress reshapes<br/>what is <span class="accent">admissible.</span></h2>
+        <p>
+          Stress is not a scalar penalty.<br/>
+          It deforms the <em>legality graph</em> &mdash; the space of procedurally valid transitions.
+        </p>
+        <div class="formula-block">
+          <code>A'<sub>ij</sub> = A<sub>ij</sub> &minus; &alpha;<sub>ij</sub> &middot; S(t)</code>
+          <span class="formula-label">Admissibility shrinks under stress</span>
+        </div>
+        <div class="formula-block">
+          <code>W'<sub>ij</sub> = W<sub>ij</sub> + &beta;<sub>ij</sub> &middot; S(t)</code>
+          <span class="formula-label">Transition cost increases</span>
+        </div>
+        <p>
+          High stress does not merely reprioritize options.<br/>
+          It <strong>removes entire pathways</strong> from consideration.
+        </p>
+        <p>
+          Deliberation operates within what remains admissible.
+        </p>
+        <div class="slider-group">
+          <label for="stress-slider">Stress level: S(t) = <span id="stress-value">0.10</span></label>
+          <input type="range" id="stress-slider" min="0" max="100" value="10" />
+        </div>
+        <p class="aside" id="stress-note">
+          At low stress, all five transitions are admissible. The full deliberative loop operates.
+        </p>
+      </div>
+      <div class="visual-col" id="stress-visual">
+        <!-- D3 legality graph deformation -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: BYPASS DYNAMICS -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="bypass" class="section">
+    <div class="section__inner section__inner--split">
+      <div class="text-col">
+        <p class="overline">Bypass Dynamics</p>
+        <h2>When deliberation becomes<br/><span class="accent">too expensive.</span></h2>
+        <p>
+          Under extreme stress or latency pressure, full evaluation may exceed
+          the available budget.
+        </p>
+        <p>
+          The system collapses into a lawful shortcut &mdash; a <strong>bypass</strong>.
+        </p>
+        <p class="aside">
+          Bypasses are not bugs.<br/>
+          They are regime-appropriate compressions of the loop.
+        </p>
+        <div class="bypass-selector" id="bypass-selector">
+          <button class="bypass-btn active" data-bypass="impulse">Impulse</button>
+          <button class="bypass-btn" data-bypass="rumination">Rumination</button>
+          <button class="bypass-btn" data-bypass="mania">Mania</button>
+          <button class="bypass-btn" data-bypass="guilt">Guilt</button>
+          <button class="bypass-btn" data-bypass="over_learning">Over-learning</button>
+        </div>
+        <div id="bypass-info" class="bypass-info">
+          <!-- Dynamically filled -->
+        </div>
+        <p class="aside" style="margin-top: 1rem;">
+          Bypasses trade completeness for viability.
+        </p>
+      </div>
+      <div class="visual-col" id="bypass-visual">
+        <!-- D3 bypass path visualization -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: COUNTERFACTUAL REGRET -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="regret" class="section">
+    <div class="section__inner section__inner--split">
+      <div class="text-col">
+        <p class="overline">Counterfactual Regret</p>
+        <h2>The path not taken<br/>is preserved.</h2>
+        <p>
+          Each cycle archives:
+        </p>
+        <ul class="archive-list">
+          <li>Vetoed proposals</li>
+          <li>Bypassed paths</li>
+          <li>Non-selected alternatives</li>
+        </ul>
+        <div class="formula-block">
+          <code>Regret(t) = max(counterfactual_value) &minus; executed_value</code>
+          <span class="formula-label">Positive regret indicates a superior forgone alternative.</span>
+        </div>
+        <p>
+          Regret is not emotion.<br/>
+          It is <em>structural comparison</em>.
+        </p>
+        <p>
+          Accumulated regret informs <strong>doctrine</strong> &mdash; persistent modifications
+          to future behavior formed from repeated constraint.
+        </p>
+        <p class="aside">
+          The system learns without replaying catastrophe.
+        </p>
+      </div>
+      <div class="visual-col" id="regret-visual">
+        <!-- D3 executed vs counterfactual path comparison -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 7: DETERMINISM -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="determinism" class="section">
+    <div class="section__inner section__inner--center">
+      <p class="overline">Perfect Determinism</p>
+      <h2>Same input. Identical trace.<br/>Every time.</h2>
+      <p class="centered-p">
+        Maelstrom is fully deterministic.
+      </p>
+      <p class="centered-p">
+        Given the same scenario specification and seed, the runtime produces
+        <strong>bit-identical traces</strong>.
+      </p>
+      <p class="centered-p">
+        Validated over:
+      </p>
+      <ul class="validation-list">
+        <li>3,000,000+ ticks</li>
+        <li>Zero NaN</li>
+        <li>Zero Inf</li>
+        <li>Bounded behavior under extreme stress</li>
+      </ul>
+      <div id="determinism-visual" class="determinism-container">
+        <!-- D3 replay hash comparison -->
+      </div>
+      <p class="centered-p">
+        Every cycle is hashed.<br/>
+        Every regime shift, veto, bypass event, and regret score is logged.
+      </p>
+      <p class="centered-p">
+        Merkle-verified trace integrity.<br/>
+        <strong>Full post-hoc auditability.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 8: WHY IT EXISTS -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="why" class="section">
+    <div class="section__inner section__inner--center">
+      <p class="overline">Why It Exists</p>
+      <h2>Performance alone<br/>is insufficient.</h2>
+      <p class="centered-p">
+        Autonomous systems increasingly operate in environments where:
+      </p>
+      <ul class="why-list">
+        <li>Legal exposure matters</li>
+        <li>Ethical defensibility matters</li>
+        <li>Survival risk matters</li>
+        <li>Performance alone is insufficient</li>
+      </ul>
+      <p class="centered-p">
+        Maelstrom provides:
+      </p>
+      <ul class="why-list">
+        <li>Deterministic arbitration</li>
+        <li>Structured constraint handling</li>
+        <li>Stress-aware decision topology</li>
+        <li>Fully auditable execution traces</li>
+      </ul>
+      <div class="cta-block">
+        <p class="cta-text">
+          It is a foundation for systems where <em>legitimacy, survivability,
+          and recoverability</em> matter as much as output quality.
+        </p>
+        <a href="https://github.com/adam-scott-thomas/maelstrom-runtime" class="cta-link" target="_blank" rel="noopener">
+          View on GitHub &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>Maelstrom Runtime &mdash; Adam Thomas</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://github.com/adam-scott-thomas/maelstrom-runtime" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
