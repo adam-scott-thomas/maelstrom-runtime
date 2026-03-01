@@ -1,0 +1,210 @@
+{
+  "name": "Crucible_V0",
+  "total_cycles": 64,
+  "seed": 42,
+  "stressor_names": [
+    "time_pressure", "ambiguity", "threat_level", "moral_weight",
+    "failure_count", "boredom", "opportunity_pressure", "competition",
+    "novelty_pressure", "resource_decay", "institutional_inertia"
+  ],
+  "stressor_schedule": {
+    "time_pressure":        [[1, 0.08], [10, 0.10], [24, 0.12], [25, 0.75], [30, 0.85], [35, 0.80], [36, 0.20], [45, 0.15], [55, 0.12], [64, 0.08]],
+    "ambiguity":            [[1, 0.20], [10, 0.25], [24, 0.30], [35, 0.35], [36, 0.78], [42, 0.85], [45, 0.80], [46, 0.40], [55, 0.25], [64, 0.15]],
+    "threat_level":         [[1, 0.05], [10, 0.05], [24, 0.08], [25, 0.70], [30, 0.85], [35, 0.75], [36, 0.15], [45, 0.10], [64, 0.05]],
+    "moral_weight":         [[1, 0.25], [10, 0.30], [11, 0.55], [15, 0.75], [18, 0.82], [19, 0.88], [24, 0.90], [25, 0.75], [35, 0.50], [45, 0.40], [55, 0.25], [64, 0.18]],
+    "failure_count":        [[1, 0.00], [10, 0.02], [24, 0.08], [25, 0.20], [35, 0.35], [36, 0.55], [42, 0.70], [45, 0.65], [46, 0.45], [55, 0.20], [64, 0.08]],
+    "boredom":              [[1, 0.15], [10, 0.20], [25, 0.05], [35, 0.03], [45, 0.06], [55, 0.18], [64, 0.28]],
+    "opportunity_pressure": [[1, 0.35], [10, 0.40], [24, 0.45], [35, 0.50], [45, 0.55], [46, 0.80], [52, 0.88], [55, 0.85], [56, 0.55], [64, 0.40]],
+    "competition":          [[1, 0.15], [10, 0.20], [25, 0.35], [30, 0.68], [35, 0.72], [36, 0.50], [45, 0.45], [46, 0.65], [52, 0.72], [55, 0.68], [56, 0.35], [64, 0.20]],
+    "novelty_pressure":     [[1, 0.25], [10, 0.30], [24, 0.35], [35, 0.40], [36, 0.65], [42, 0.75], [45, 0.72], [46, 0.70], [52, 0.72], [55, 0.65], [56, 0.35], [64, 0.20]],
+    "resource_decay":       [[1, 0.10], [10, 0.12], [25, 0.30], [30, 0.58], [35, 0.62], [36, 0.40], [45, 0.35], [55, 0.25], [64, 0.15]],
+    "institutional_inertia":[[1, 0.08], [10, 0.10], [11, 0.25], [15, 0.40], [18, 0.50], [24, 0.55], [25, 0.45], [35, 0.35], [45, 0.20], [64, 0.10]]
+  },
+  "transitions": [
+    {
+      "source": "evaluate", "target": "generate",
+      "A": 1.0, "W": 0.10,
+      "alpha": [0.02, 0.04, 0.01, 0.01, 0.02, 0.00, 0.01, 0.01, 0.03, 0.01, 0.00],
+      "beta":  [0.04, 0.06, 0.02, 0.02, 0.03, 0.01, 0.02, 0.02, 0.04, 0.02, 0.01]
+    },
+    {
+      "source": "generate", "target": "select",
+      "A": 1.0, "W": 0.10,
+      "alpha": [0.02, 0.03, 0.01, 0.03, 0.01, 0.00, 0.01, 0.01, 0.03, 0.01, 0.01],
+      "beta":  [0.03, 0.05, 0.02, 0.04, 0.02, 0.01, 0.02, 0.02, 0.04, 0.02, 0.01]
+    },
+    {
+      "source": "select", "target": "execute",
+      "A": 0.45, "W": 0.15,
+      "alpha": [0.15, 0.05, 0.20, 0.08, 0.12, 0.00, 0.00, 0.02, 0.00, 0.15, 0.03],
+      "beta":  [0.08, 0.04, 0.10, 0.05, 0.06, 0.01, 0.01, 0.02, 0.01, 0.08, 0.02]
+    },
+    {
+      "source": "execute", "target": "reflect",
+      "A": 1.0, "W": 0.10,
+      "alpha": [0.01, 0.02, 0.01, 0.01, 0.02, 0.00, 0.01, 0.00, 0.01, 0.01, 0.00],
+      "beta":  [0.03, 0.03, 0.02, 0.02, 0.03, 0.01, 0.01, 0.01, 0.01, 0.02, 0.01]
+    },
+    {
+      "source": "reflect", "target": "evaluate",
+      "A": 1.0, "W": 0.05,
+      "alpha": [0.01, 0.01, 0.00, 0.01, 0.01, 0.00, 0.00, 0.00, 0.01, 0.00, 0.00],
+      "beta":  [0.02, 0.02, 0.01, 0.01, 0.02, 0.01, 0.01, 0.01, 0.02, 0.01, 0.01]
+    },
+    {
+      "source": "evaluate", "target": "execute",
+      "A": 0.45, "W": 0.55,
+      "alpha": [0.03, 0.01, 0.03, 0.01, 0.02, 0.00, 0.01, 0.01, 0.01, 0.02, 0.00],
+      "beta":  [0.02, 0.01, 0.02, 0.01, 0.01, 0.00, 0.01, 0.01, 0.01, 0.01, 0.00]
+    },
+    {
+      "source": "evaluate", "target": "reflect",
+      "A": 0.40, "W": 0.60,
+      "alpha": [0.01, 0.02, 0.00, 0.01, 0.02, 0.00, 0.00, 0.00, 0.02, 0.00, 0.00],
+      "beta":  [0.01, 0.03, 0.01, 0.01, 0.02, 0.01, 0.00, 0.00, 0.02, 0.01, 0.01]
+    },
+    {
+      "source": "generate", "target": "execute",
+      "A": 0.45, "W": 0.50,
+      "alpha": [0.01, 0.00, 0.01, 0.00, 0.01, 0.00, 0.02, 0.02, 0.02, 0.01, 0.00],
+      "beta":  [0.01, 0.01, 0.01, 0.00, 0.01, 0.01, 0.03, 0.02, 0.02, 0.01, 0.00]
+    },
+    {
+      "source": "select", "target": "reflect",
+      "A": 0.40, "W": 0.20,
+      "alpha": [0.01, 0.01, 0.01, 0.02, 0.01, 0.00, 0.00, 0.00, 0.00, 0.01, 0.02],
+      "beta":  [0.01, 0.01, 0.01, 0.03, 0.01, 0.00, 0.00, 0.01, 0.00, 0.01, 0.03]
+    },
+    {
+      "source": "reflect", "target": "generate",
+      "A": 0.35, "W": 0.65,
+      "alpha": [0.00, 0.02, 0.00, 0.00, 0.02, 0.01, 0.00, 0.00, 0.02, 0.00, 0.00],
+      "beta":  [0.01, 0.03, 0.00, 0.00, 0.03, 0.01, 0.01, 0.00, 0.03, 0.01, 0.01]
+    }
+  ],
+  "gradient_window": 2,
+  "regime_inertia": {
+    "default": 0.003,
+    "out_of_peacetime": 0.003,
+    "out_of_survival": 0.006,
+    "out_of_moral": 0.005,
+    "out_of_epistemic": 0.004,
+    "out_of_economic": 0.004,
+    "into_survival": 0.001,
+    "into_moral": 0.001,
+    "into_epistemic": 0.001,
+    "into_economic": 0.001,
+    "into_peacetime": 0.002
+  },
+  "regimes": [
+    {
+      "name": "survival",
+      "w": [0.30, 0.03, 0.35, 0.03, 0.12, 0.00, 0.00, 0.02, 0.00, 0.13, 0.02],
+      "u": [0.20, 0.08, 0.05, 0.05, 0.10, 0.02]
+    },
+    {
+      "name": "legal",
+      "w": [0.05, 0.08, 0.08, 0.22, 0.05, 0.00, 0.02, 0.08, 0.02, 0.05, 0.35],
+      "u": [0.25, 0.05, 0.15, 0.10, 0.05, 0.02]
+    },
+    {
+      "name": "moral",
+      "w": [0.02, 0.05, 0.10, 0.48, 0.08, 0.00, 0.00, 0.02, 0.00, 0.05, 0.20],
+      "u": [0.05, 0.25, 0.08, 0.05, 0.05, 0.02]
+    },
+    {
+      "name": "economic",
+      "w": [0.03, 0.03, 0.00, 0.02, 0.05, 0.05, 0.28, 0.28, 0.12, 0.12, 0.02],
+      "u": [0.05, 0.03, 0.18, 0.15, 0.07, 0.02]
+    },
+    {
+      "name": "epistemic",
+      "w": [0.02, 0.38, 0.03, 0.02, 0.12, 0.03, 0.02, 0.03, 0.30, 0.02, 0.03],
+      "u": [0.08, 0.05, 0.05, 0.05, 0.18, 0.02]
+    },
+    {
+      "name": "peacetime",
+      "w": [0.02, 0.08, 0.02, 0.05, 0.02, 0.18, 0.25, 0.12, 0.12, 0.08, 0.06],
+      "u": [0.05, 0.05, 0.05, 0.05, 0.05, 0.02]
+    }
+  ],
+  "overlays": [
+    {
+      "overlay_type": "identity",
+      "stressor_thresholds": {"moral_weight": 0.85},
+      "affected_phases": ["execute"],
+      "description": "Identity veto: refuse execution under extreme moral exposure",
+      "logic": "all"
+    },
+    {
+      "overlay_type": "coalition",
+      "stressor_thresholds": {"competition": 0.65, "resource_decay": 0.55},
+      "affected_phases": ["select", "execute"],
+      "description": "Coalition veto: block when competition and resource decay exceed tolerance",
+      "logic": "all"
+    }
+  ],
+  "bypasses": [
+    {
+      "name": "impulse",
+      "source_phase": "evaluate",
+      "target_phase": "execute",
+      "collapsed_path": ["evaluate", "execute", "reflect"],
+      "eligible_regimes": ["survival"],
+      "stressor_weights": {"time_pressure": 0.5, "threat_level": 0.5},
+      "latency_budget": {
+        "survival": 0.30, "legal": 0.45, "moral": 0.40,
+        "economic": 0.40, "epistemic": 0.40, "peacetime": 0.70
+      }
+    },
+    {
+      "name": "rumination",
+      "source_phase": "evaluate",
+      "target_phase": "reflect",
+      "collapsed_path": ["evaluate", "reflect"],
+      "eligible_regimes": ["epistemic"],
+      "stressor_weights": {"ambiguity": 0.5, "novelty_pressure": 0.3, "failure_count": 0.2},
+      "latency_budget": {
+        "survival": 0.30, "legal": 0.45, "moral": 0.40,
+        "economic": 0.40, "epistemic": 0.40, "peacetime": 0.70
+      }
+    },
+    {
+      "name": "mania",
+      "source_phase": "generate",
+      "target_phase": "execute",
+      "collapsed_path": ["evaluate", "generate", "execute", "reflect"],
+      "eligible_regimes": ["economic"],
+      "stressor_weights": {"opportunity_pressure": 0.4, "novelty_pressure": 0.3, "competition": 0.3},
+      "latency_budget": {
+        "survival": 0.30, "legal": 0.45, "moral": 0.40,
+        "economic": 0.40, "epistemic": 0.40, "peacetime": 0.70
+      }
+    },
+    {
+      "name": "guilt",
+      "source_phase": "select",
+      "target_phase": "reflect",
+      "collapsed_path": ["evaluate", "generate", "select", "reflect"],
+      "eligible_regimes": ["moral", "legal"],
+      "stressor_weights": {"moral_weight": 0.6, "institutional_inertia": 0.4},
+      "latency_budget": {
+        "survival": 0.30, "legal": 0.45, "moral": 0.40,
+        "economic": 0.40, "epistemic": 0.40, "peacetime": 0.70
+      }
+    },
+    {
+      "name": "over_learning",
+      "source_phase": "reflect",
+      "target_phase": "generate",
+      "collapsed_path": ["evaluate", "generate", "select", "execute", "reflect", "generate"],
+      "eligible_regimes": ["epistemic", "economic"],
+      "stressor_weights": {"failure_count": 0.4, "ambiguity": 0.3, "novelty_pressure": 0.3},
+      "latency_budget": {
+        "survival": 0.30, "legal": 0.45, "moral": 0.40,
+        "economic": 0.40, "epistemic": 0.40, "peacetime": 0.70
+      }
+    }
+  ],
+  "specialist_config": {}
+}

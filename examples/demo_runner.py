@@ -3,7 +3,7 @@
 
 Usage:
     python examples/demo_runner.py examples/minimal_spec.json
-    python examples/demo_runner.py examples/simple_scenario.json
+    python examples/demo_runner.py examples/meridian_v0.json
 """
 import json
 import sys
@@ -28,7 +28,11 @@ def main():
     print(json.dumps(summary, indent=2))
     print(f"\nCompleted {summary['total_cycles']} cycles.")
     print(f"Regime distribution: {summary['regime_distribution']}")
-    print(f"Mean regret: {summary['regret']['mean']}")
+    print(f"Mean regret: {summary['mean_regret']:.4f}")
+    print(f"Max regret: {summary['max_regret']:.4f}")
+    print(f"Switches: {summary['regime_switches']}")
+    print(f"Bypasses: {summary['total_bypass_events']}")
+    print(f"Vetoes: {summary['total_veto_events']}")
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
-"""Stressor field S(t) -- piecewise-linear interpolation from scenario schedule.
+"""Stressor field S(t) — piecewise-linear interpolation from scenario schedule.
 
-Whitepaper S4.1 / Appendix A.1:
+Whitepaper §4.1 / Appendix A.1:
   S(t) is a vector-valued time series with components S_k(t) in [0,1].
-  Scenarios define piecewise-linear trajectories via keyframe schedules.
+  Scenarios define piecewise-constant or piecewise-linear trajectories.
 """
 from __future__ import annotations
 
-from .types import MaelstromSpec
+from .spec import MaelstromSpec
 from .utils import clamp
 
 
@@ -31,12 +31,12 @@ def interpolate_keyframes(keyframes: list[list[float]], t: float) -> float:
 
 def compute_stressor_vector(spec: MaelstromSpec, t: int) -> list[float]:
     """Return S(t) as a list aligned with spec.stressor_names."""
-    return [
-        clamp(interpolate_keyframes(
-            spec.stressor_schedule.get(name, [[0, 0.0]]), float(t),
-        ))
-        for name in spec.stressor_names
-    ]
+    vec = []
+    for name in spec.stressor_names:
+        kf = spec.stressor_schedule.get(name, [[0, 0.0]])
+        val = interpolate_keyframes(kf, float(t))
+        vec.append(clamp(val))
+    return vec
 
 
 def stressor_dict(spec: MaelstromSpec, vec: list[float]) -> dict[str, float]:

@@ -1,7 +1,7 @@
 """Deterministic execution utilities.
 
-Seeded RNG, deterministic tie-breaking, state hashing, and clamping.
-All randomness is recorded for reproducibility verification.
+All randomness is seeded and recorded. Provides deterministic tie-breaking
+and state hashing for trace verification.
 """
 from __future__ import annotations
 
@@ -11,6 +11,8 @@ import random
 from typing import Any, Callable, Sequence, TypeVar
 
 T = TypeVar("T")
+
+REGIME_PRIORITY = ["survival", "legal", "moral", "economic", "epistemic", "peacetime"]
 
 
 class DeterministicRNG:
@@ -30,7 +32,11 @@ class DeterministicRNG:
         return self.rng.uniform(a, b)
 
     def noise(self, amplitude: float = 0.05) -> float:
+        """Small deterministic perturbation for tie-breaking."""
         return self.uniform(-amplitude, amplitude)
+
+    def state_snapshot(self) -> dict:
+        return {"seed": self.seed, "draw_count": self.draw_count}
 
 
 def deterministic_argmax(
