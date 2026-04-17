@@ -12,3 +12,7 @@ output/
 .venv/
 .claude/
 _archive/
+
+# Security
+*.key
+*.pem

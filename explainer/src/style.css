@@ -147,6 +147,72 @@ body {
   align-items: center;
 }
 
+/* ── Hero Links & Try-It ────────────────────────────────────────────── */
+.hero-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  transition: all 0.2s;
+}
+.hero-link:hover {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+.hero-link svg { opacity: 0.8; }
+
+.hero-link--demo {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.hero-link--demo:hover {
+  background: #5a7de8;
+  border-color: #5a7de8;
+}
+
+.hero-tagline {
+  font-size: 1.15rem;
+  color: var(--fg-dim);
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.hero-tagline strong { color: var(--fg); font-weight: 600; }
+
+.hero-tryit {
+  margin-bottom: 1.5rem;
+}
+
+.hero-code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: var(--fg);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-dim { color: var(--fg-muted); }
+
 .overline {
   font-size: 0.75rem;
   font-weight: 600;
@@ -251,6 +317,8 @@ h2 {
 .visual-col svg {
   width: 100%;
   height: auto;
+  max-width: 100%;
+  touch-action: manipulation;
 }
 
 /* ── Phase Cards ────────────────────────────────────────────────────── */
@@ -343,6 +411,7 @@ input[type="range"] {
   background: var(--border);
   border-radius: 2px;
   outline: none;
+  touch-action: manipulation;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -510,6 +579,237 @@ input[type="range"]::-moz-range-thumb {
   text-align: left;
 }
 
+/* ── Tooltip ────────────────────────────────────────────────────────── */
+#tooltip {
+  position: fixed;
+  z-index: 1001;
+  background: rgba(18, 18, 26, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--fg);
+  font-family: 'JetBrains Mono', monospace;
+  max-width: 320px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  backdrop-filter: blur(8px);
+  line-height: 1.5;
+}
+
+#tooltip .tt-label { color: var(--fg-muted); }
+#tooltip .tt-value { color: var(--accent); }
+#tooltip .tt-regime { font-weight: 600; }
+#tooltip .tt-row { display: flex; justify-content: space-between; gap: 1rem; }
+
+/* ── Inspector Panel ────────────────────────────────────────────────── */
+.inspector-panel {
+  position: fixed;
+  right: -380px;
+  top: var(--nav-h);
+  width: 360px;
+  height: calc(100vh - var(--nav-h));
+  background: rgba(12, 12, 20, 0.97);
+  border-left: 1px solid var(--border);
+  z-index: 998;
+  overflow-y: auto;
+  transition: right 0.3s ease;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.inspector-panel.open { right: 0; }
+
+.inspector-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--fg-dim);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+.inspector-close:hover { color: var(--fg); }
+
+#inspector-content h3 {
+  font-size: 0.85rem;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+#inspector-content .proposal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+#inspector-content .proposal-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(110, 142, 251, 0.15);
+}
+
+#inspector-content .proposal-name {
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: 0.3rem;
+}
+
+#inspector-content .score-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+#inspector-content .score-bar-label {
+  width: 80px;
+  font-size: 0.65rem;
+  color: var(--fg-muted);
+  text-align: right;
+}
+
+#inspector-content .score-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#inspector-content .score-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+#inspector-content .score-bar-val {
+  width: 30px;
+  font-size: 0.65rem;
+  color: var(--fg-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+#inspector-content .regime-score {
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Stressor Control Panel ─────────────────────────────────────────── */
+.stressor-panel {
+  margin: 1rem 0;
+}
+
+.stressor-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stressor-secondary {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.stressor-secondary.expanded {
+  max-height: 300px;
+  margin-top: 0.5rem;
+}
+
+.stressor-slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.stressor-slider-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+}
+
+.stressor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.stressor-val {
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+
+.stressor-expand-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  font-family: 'Inter', sans-serif;
+}
+.stressor-expand-btn:hover { color: var(--fg); border-color: var(--accent); }
+
+/* ── Cycle Scrubber ─────────────────────────────────────────────────── */
+.cycle-scrubber {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+}
+
+.cycle-label {
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+
+.cycle-input {
+  flex: 1;
+}
+
+.cycle-regime {
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── Bypass eligibility badges ──────────────────────────────────────── */
+.bypass-btn .badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.bypass-btn .badge.eligible { background: #22c55e; }
+.bypass-btn .badge.ineligible { background: #ef4444; opacity: 0.5; }
+
+.bypass-btn.locked {
+  opacity: 0.4;
+  border-color: #333;
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────── */
 footer {
   padding: 2rem;
@@ -540,6 +840,8 @@ footer a:hover { color: var(--accent); }
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────── */
+
+/* Tablet ------------------------------------------------------------ */
 @media (max-width: 900px) {
   .section__inner--split,
   .section--hero .section__inner {
@@ -549,9 +851,9 @@ footer a:hover { color: var(--accent); }
 
   .text-col { max-width: 100%; }
 
-  .visual-col { min-height: 320px; }
+  .visual-col { min-height: 280px; }
 
-  .hero-visual { height: 350px; }
+  .hero-visual { height: 300px; }
 
   .nav-links { gap: 0.75rem; }
   .nav-links a { font-size: 0.7rem; }
@@ -559,13 +861,104 @@ footer a:hover { color: var(--accent); }
   .section { padding: 4rem 1.5rem; }
 
   .regime-legend { grid-template-columns: 1fr; }
+
+  .determinism-container { max-width: 100%; }
 }
 
+/* Phone ------------------------------------------------------------- */
 @media (max-width: 600px) {
+  /* Nav */
   .nav-links { display: none; }
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.5rem; }
-  .section { padding: 3rem 1rem; }
-  .bypass-selector { gap: 0.3rem; }
-  .bypass-btn { padding: 0.3rem 0.6rem; font-size: 0.7rem; }
+  #nav { padding: 0 1rem; }
+
+  /* Typography */
+  h1 { font-size: 1.75rem; margin-bottom: 1rem; }
+  h2 { font-size: 1.35rem; }
+
+  /* Layout */
+  .section { padding: 2.5rem 1rem; min-height: auto; }
+  .section--hero { min-height: 100vh; min-height: 100dvh; }
+  .section__inner--center { max-width: 100%; }
+
+  /* Hero */
+  .hero-links { flex-wrap: wrap; gap: 0.5rem; }
+  .hero-link { padding: 0.5rem 1rem; font-size: 0.85rem; }
+  .hero-tagline { font-size: 1rem; }
+  .hero-visual { height: 250px; order: -1; }
+  .hero-code {
+    font-size: 0.65rem;
+    padding: 0.75rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 2;
+  }
+  .hero-sub { font-size: 0.95rem; }
+
+  /* Visual columns — don't let them eat the viewport */
+  .visual-col { min-height: 220px; }
+
+  /* Formula blocks — prevent overflow */
+  .formula-block { padding: 0.75rem; overflow-x: auto; }
+  .formula-block code { font-size: 0.8rem; word-break: break-all; }
+
+  /* Sliders — fat touch targets */
+  input[type="range"] { height: 8px; }
+  input[type="range"]::-webkit-slider-thumb {
+    width: 28px;
+    height: 28px;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Stressor panel */
+  .stressor-slider-row label { font-size: 0.8rem; }
+  .stressor-expand-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+  }
+
+  /* Bypass buttons — proper touch targets */
+  .bypass-selector { gap: 0.4rem; }
+  .bypass-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    min-height: 40px;
+  }
+  .bypass-info .bypass-meta { grid-template-columns: 1fr; }
+
+  /* Phase cards */
+  .phase-card { padding: 0.5rem 0.6rem; }
+
+  /* Cycle scrubber */
+  .cycle-scrubber { flex-wrap: wrap; gap: 0.5rem; }
+
+  /* Inspector panel — full width on mobile */
+  .inspector-panel {
+    width: 100vw;
+    right: -100vw;
+  }
+
+  /* CTA */
+  .cta-block { padding: 1.25rem; }
+
+  /* Lists */
+  .validation-list,
+  .why-list { max-width: 100%; }
+
+  /* Footer */
+  footer { padding: 1.5rem 1rem; }
+  .footer-inner { font-size: 0.75rem; }
+}
+
+/* Small phone ------------------------------------------------------ */
+@media (max-width: 380px) {
+  h1 { font-size: 1.5rem; }
+  .section { padding: 2rem 0.75rem; }
+  .hero-code { font-size: 0.6rem; padding: 0.6rem; }
+  .hero-link { padding: 0.45rem 0.75rem; font-size: 0.8rem; }
+  .visual-col { min-height: 180px; }
+  .hero-visual { height: 200px; }
 }
